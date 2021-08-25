@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-http-pod
+spec:
+  containers:
+  - name: httpd
+    image: httpd
+    ports:
+        - containerPort: 8080
+    livenessProbe:
+      httpGet:
+        path: /healthy
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 3
+      failureThreshold: 3

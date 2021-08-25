@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: frontend
+  template:
+    metadata:
+      name: nodeapp-pod
+      labels:
+        type: frontend
+    spec:
+      imagePullSecrets:
+      - name: regpriv1
+      containers:
+      - name: nodeapp-container
+        image: navjoy220161/node-mongo:1.0.10
+        ports:
+        - containerPort: 3000
+        env:
+        - name: MONGO_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: app-configmap
+              key: mongo-host  
+        - name: MONGO_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: app-configmap
+              key: mongo-database 
+        - name: APP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-configmap
+              key: app-port
+
+

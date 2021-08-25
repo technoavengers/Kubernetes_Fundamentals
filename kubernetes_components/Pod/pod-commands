@@ -1,0 +1,50 @@
+#################### Run a Pod ##########################
+kubectl run nginx --image nginx
+
+#################### Run a Pod in a namespace ##########################
+kubectl run nginx --image=nginx -n  mynamespace     
+
+#################### Describe a Pod ##########################
+kubectl describe  pod nginx
+
+#################### Get a Pod in current namespace ######################
+kubectl get pods
+
+#################### Get a Pod with a selector######################
+kubectl get pod --selector type=frontend
+
+#################### Get a Pod in current namespace with more details ######################
+kubectl get pods -o wide 
+
+#################### Get a Pod in all namespace ######################
+kubectl get pods --all-namespaces
+
+#################### Pod Logs ##########################
+kubectl logs nginx
+
+#################### Streaming Pod Logs ##########################
+kubectl logs -f nginx
+
+#################### Streaming Pod Logs of a particular container (in case of multi container pod)##########################
+kubectl logs -f <pod-name> -c <container-name>
+
+##################### Running a command in a container ############################
+kubectl exec nginx -c nginx -- ls
+
+#################### Port forwarding ###################################
+kubectl port-forward my-pod 5000:6000 
+
+################## Getting yaml file from a running pod ################################
+kubectl get pod nginx -o yaml > nginx.yaml
+
+####################### Getting yaml file without running pod ######################
+kubectl run redis --image=redis123 --dry-run=client -o yaml > redis-pod.yaml
+
+#################### Delete a Pod ##########################
+kubectl delete pod nginx
+
+#################### Delete all Pods in given namespace ##########################
+kubectl -n my-ns delete pod --all  
+
+
+

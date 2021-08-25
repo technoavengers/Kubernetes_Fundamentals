@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config-new
+data:
+  APP_COLOR: pink
+  LOCATION: US
+

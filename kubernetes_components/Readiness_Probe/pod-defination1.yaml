@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: readiness-http-pod
+spec:
+  containers:
+  - name: httpd
+    image: httpd
+    ports:
+        - containerPort: 8080
+    args:
+      - sh
+      - -c
+      - rm htdocs/index.html;sleep 30; echo "welcome to version2" > htdocs/index.html; 
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 3
+      failureThreshold: 3

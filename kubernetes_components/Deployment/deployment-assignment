@@ -1,0 +1,6 @@
+1. Create a namespace test
+2. Create a deployment inside the namespace test with below details:
+    Image: busybox
+    replicas: 3
+    label= location:us
+3. Check all deployments , pods and replicasets inside the namespace test.

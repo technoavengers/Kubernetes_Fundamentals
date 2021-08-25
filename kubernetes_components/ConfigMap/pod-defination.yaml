@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-pod
+spec:
+  containers:
+    - name: test-container
+      image: httpd
+      envFrom:
+      - configMapRef:
+          name: app-config-new
+  restartPolicy: Never

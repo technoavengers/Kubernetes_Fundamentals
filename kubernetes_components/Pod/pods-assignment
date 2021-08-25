@@ -1,0 +1,10 @@
+1. Find out how many pods running in the current namespace?
+2. Create a new pod with the nginx image and name nginx-pod without using a yaml file.
+3. Create a new pod with the nginx image and name nginx-yaml using a yaml file.
+4. Create a new pod with the busybox-new image and name busybox-pod and describe the pod to check the failure events.
+5. Check for the correct image in DockerHub.Fix the issue in above pod and apply the changes. 
+    (Hint: get yaml file from running pod, delete pod, change yaml file and apply the changes using kubectl apply -f <name>.yaml)
+6. Check the namespace,label and node on which above pod is placed
+7. Delete the pod nginx-pod
+8. 
+

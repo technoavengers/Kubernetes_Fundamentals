@@ -1,0 +1,12 @@
+1. Create a pod ubuntu-sleeper 
+    * image - ubuntu
+    * name - ubuntu-sleeper
+    * start command - sleep 5000
+    * User: 1000
+
+2. Check if we can set date in ubuntu-sleeper
+
+
+3. Update pod 'ubuntu-sleeper' to run as Root user and with the 'SYS_TIME' capability.
+
+4. Now check again if we are allowed to set date now?

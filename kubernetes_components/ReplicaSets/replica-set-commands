@@ -1,0 +1,5 @@
+kubectl get replicas
+
+kubectl scale --replicas=6 -f replica-set.yaml
+
+kubectl describe rs <replicaset-name>

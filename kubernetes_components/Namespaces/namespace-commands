@@ -1,0 +1,8 @@
+kubectl get namespaces
+
+kubectl get pods --namespace=kube-system
+
+kubectl create namespace  prod
+
+kubectl create -f pod-defination.yaml --namespace=dev
+

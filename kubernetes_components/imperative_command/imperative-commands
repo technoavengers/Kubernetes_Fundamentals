@@ -1,0 +1,71 @@
+kubectl run redis --image redis:alpine Labels:tier=db
+
+kubectl expose pod redis --port=6379 --name redis-service
+
+kubectl create deployment webapp --image=kodekloud/webapp-color --replicas=3
+
+
+####################### namespace ###########################################
+
+kubectl create namespace dev
+
+kubectl run custom-nginx --image=nginx --port=8080 -n dev
+
+kubectl get pod --namespace dev
+
+kubectl get all --namespace dev
+
+######################## deployment ######################################
+kubectl create deployment redis-deploy --image=redis --replicas=2
+
+kubectl apply -f redis-deployment.yaml
+
+kubectl set image deployment redis-deploy redis=redis:6.2.5 --record
+
+kubectl rollout status deployment/redis-deploy
+
+kubectl rollout history deployment/redis-deploy
+
+kubectl rollout history deployment/redis-deploy --revision=1
+
+kubectl rollout undo deployment/redis-deploy
+
+###############################################################################
+
+kubectl run httpd --image=httpd:alpine --port=80 --expose
+
+kubectl create configmap myconfigmap --from-literal=APP_COLOR=pink --from-literal=LOCATION=us
+
+kubectl create configmap myconfigmap1 --from-file=appconfig.properties
+
+kubectl create secret generic my-secret --from-literal=DB_HOST=mysql --from-literal=DB_PASS=mysql123
+
+kubectl create secret generic my-secret --from-file=app_secret.properties
+
+kubectl get secret
+
+kubectl describe secret
+
+kubectl get secret my-secret -o yaml
+
+######################## encoding/decoding using base64 on unix/linux ##################
+echo -n 'mysql' | bas64
+
+echo -n 'bXlzcWw=' | bas64 --decode
+
+############################################################################################
+
+kubectl create serviceaccount mywebapp-sa 
+
+kubectl get serviceaccount
+
+kubectl describe serviceaccount mywebapp-sa
+
+kubectl taint node docker-desktop app=blue:NoSchedule
+kubectl taint --all node app=blue:NoSchedule-
+
+kubectl label node docker-desktop size=large
+
+kubectl config set-context --current --namespace=<name here>
+
+kubectl expose deployment ingress-controller --type=NodePort --port=80 --name=ingress --dry-run=client -o yaml > ingress.yaml

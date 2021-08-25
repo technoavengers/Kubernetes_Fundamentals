@@ -1,0 +1,5 @@
+1. Create a pod with image nginx with label "type:backend"
+2. Create a replicaset "busybox-replica" of 4 for image busybox having label "type:backend".
+3. Check the pods created by replicaset
+4. Scale above replicaset to 5.
+5. Delete one of the pod created by replicaset and get pods again.

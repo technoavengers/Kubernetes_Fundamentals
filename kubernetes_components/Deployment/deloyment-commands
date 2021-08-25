@@ -1,0 +1,6 @@
+kubectl set image deployment/backend busybox=busybox:v2          # Rolling update "busybox" containers of "backend" deployment, updating the image
+kubectl rollout history deployment/frontend                      # Check the history of deployments including the revision 
+kubectl rollout undo deployment/backend                        # Rollback to the previous deployment
+kubectl rollout undo deployment/backend --to-revision=2         # Rollback to a specific revision
+kubectl rollout status -w deployment/backend                   # Watch rolling update status of "frontend" deployment until completion
+kubectl rollout restart deployment/backend 
