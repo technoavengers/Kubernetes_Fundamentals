@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: httpd-pod-1
+  labels:
+    type: frontend
+    location: us
+spec:
+  containers:
+  - name: httpd-container
+    image: httpd:2.4-alpine

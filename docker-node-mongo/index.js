@@ -28,6 +28,10 @@ app.get('/', (req, res) => {
     .catch(err => res.status(404).json({ msg: 'No items found' }));
 });
 
+app.get('/healthy', (req, res) => {
+      res.render(res.status(200).json({ msg: 'I am super healthy' }))
+});
+
 app.post('/item/add', (req, res) => {
   const newItem = new Item({
     name: req.body.name

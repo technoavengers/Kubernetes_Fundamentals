@@ -36,5 +36,31 @@ spec:
             configMapKeyRef:
               name: app-configmap
               key: app-port
+        # args:
+        # - sh
+        # - -c
+        # - sleep 20; touch hello; npm start;
+        # readinessProbe:
+        #   exec:
+        #     command:
+        #     - cat 
+        #     - hello
+        #   initialDelaySeconds: 15
+        #   periodSeconds: 6
+        #   failureThreshold: 4     
+        # livenessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: 3000
+        #   initialDelaySeconds: 20
+        #   failureThreshold: 3
+        #   periodSeconds: 3
+        # tolerations:
+        # - key: "app"
+        #   operator: "Equal"
+        #   value: "blue"
+        #   effect: "NoSchedule"
+
+          
 
 

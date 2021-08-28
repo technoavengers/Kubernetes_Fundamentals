@@ -4,9 +4,12 @@ metadata:
   name: mongo
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      type: backend
   template:
     metadata:
-      name: mongodd-pod
+      name: mongodb-pod
       labels:
         type: backend
     spec:
@@ -22,7 +25,3 @@ spec:
       - name: mongodb-volume
         persistentVolumeClaim: 
           claimName: mongo-pvc1
-
-  selector:
-    matchLabels:
-      type: backend
