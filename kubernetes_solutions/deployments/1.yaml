@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: nginx-deployment
+  labels:
+    country: us
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: loadbalancer
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        type: loadbalancer
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.21.1-alpine

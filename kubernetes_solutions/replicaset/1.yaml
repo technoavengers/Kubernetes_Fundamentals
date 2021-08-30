@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rs
+  labels:
+    type: loadBalancer-replica
+spec:
+  replicas: 3 
+  selector: 
+    matchLabels:
+      type: loadBalancer
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        type: loadBalancer
+        location: us
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.21.1-alpine

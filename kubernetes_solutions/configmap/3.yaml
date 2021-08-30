@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: htttp-game-pod
+spec:
+  containers:
+    - name: httpd-container
+      image: httpd
+      env:
+      - name: ENEMIES_TYPE
+        valueFrom:
+          configMapKeyRef:
+            name: gameconfigmap
+            key: enemies
+      - name: TOTAL_LIVES
+        valueFrom:
+          configMapKeyRef:
+            name: gameconfigmap
+            key: lives
+      envFrom:
+        -  configMapRef:
+             name: uiconfigmap   
+        
+          
+        
