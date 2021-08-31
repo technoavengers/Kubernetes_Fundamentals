@@ -6,6 +6,10 @@ spec:
   containers:
     - name: httpd-container
       image: httpd
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
       env:
       - name: ENEMIES_TYPE
         valueFrom:

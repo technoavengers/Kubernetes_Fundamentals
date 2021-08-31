@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+     type: frontend-http
+  ports:
+  - port: 80
+    targetPort: 80
