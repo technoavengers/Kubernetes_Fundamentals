@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: app-configmap
 data:
-  mongo-host: mongodb-h.default.svc.cluster.local:27017
+  mongo-host: mongodb-service.default.svc.cluster.local:27017
   app-port: '3000'
   mongo-database: docker-node-mongo

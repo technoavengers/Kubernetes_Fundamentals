@@ -26,7 +26,7 @@ kubectl rollout status deployment/redis-deploy
 
 kubectl rollout history deployment/redis-deploy
 
-kubectl rollout history deployment/redis-deploy --revision=1
+kubectl rollout history deployment/redis-deploy --to-revision=1
 
 kubectl rollout undo deployment/redis-deploy
 

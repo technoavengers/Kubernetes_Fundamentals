@@ -14,7 +14,7 @@ spec:
         type: frontend
     spec:
       imagePullSecrets:
-      - name: regpriv1
+      - name: regpriv3
       containers:
       - name: nodeapp-container
         image: navjoy220161/node-mongo:1.0.10

@@ -21,10 +21,10 @@ spec:
         - containerPort: 27017
         volumeMounts:
         - mountPath: /data/db
-          name: mongo-pvc1
+          name: mongo-pvc2
   volumeClaimTemplates:
   - metadata:
-      name: mongo-pvc1
+      name: mongo-pvc2
     spec:
       accessModes:
         - ReadWriteOnce

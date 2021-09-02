@@ -10,6 +10,7 @@ spec:
   hostPath:
     path: 'D:\tmp1'
     type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Retain
 
 ---
 apiVersion: v1
@@ -24,3 +25,4 @@ spec:
   hostPath:
     path: 'D:\tmp2'
     type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Retain

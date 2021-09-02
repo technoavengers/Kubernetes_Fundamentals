@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: readiness-pod
+spec:
+  containers:
+  - name: httpd-pod
+    image: httpd
+    args:
+      - sh
+      - -c
+      - sleep 20; touch hello;httpd-foreground";
+    readinessProbe:
+      exec:
+        command:
+          - cat 
+          - hello
+      initialDelaySeconds: 15
+      periodSeconds: 3
+      failureThreshold: 3

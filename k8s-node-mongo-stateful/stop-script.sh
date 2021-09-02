@@ -3,6 +3,7 @@ kubectl delete secret mongodb-secret
 kubectl delete deployment nodeapp
 kubectl delete statefulset mongo
 kubectl delete service mongodb-h
+kubectl delete service mongodb-service
 kubectl delete service node-service
 kubectl delete pvc mongo-pvc1
 kubectl delete pv mongo-persistence1

@@ -11,7 +11,10 @@ app.use(express.urlencoded({ extended: false }));
 console.log('MongoDB url' + process.env.MONGO_HOST)
 const host = process.env.MONGO_HOST
 const database = process.env.MONGO_DATABASE
+console.log(host)
+console.log(database)
 const mongoURL = "mongodb://"+host+"/"+database
+console.log(mongoURL)
 mongoose
   .connect(
     mongoURL,
