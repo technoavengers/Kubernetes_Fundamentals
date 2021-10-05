@@ -1,0 +1,13 @@
+######### kubectl create -f pod-defination.yaml ############################
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: myweb-app
+  labels:
+    type: frontend
+spec:
+  containers:
+    - name: httpd-container
+      image: httpd      
+    - name: mongodb-container
+      image: mongo
