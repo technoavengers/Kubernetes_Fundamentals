@@ -1,3 +1,3 @@
-From busybox
+FROM busybox
 CMD [ "10" ]
 ENTRYPOINT [ "sleep" ]

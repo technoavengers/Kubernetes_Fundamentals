@@ -8,7 +8,6 @@ spec:
   containers:
     - name: ubuntu-sleeper
       image: ubuntu-sleeper
-      imagePullPolicy: Always
       # Overrides entrypoint in the docker image
       command: ["sleep2.0"]     
       #Overrides Command argument in the docker image

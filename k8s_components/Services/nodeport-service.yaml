@@ -3,9 +3,9 @@ kind: Service
 metadata:
   name: mywebapp-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
-    type: frontend
+    type: frontend-http
   ports:
   - port: 80
     targetPort: 80
