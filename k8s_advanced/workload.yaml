@@ -120,13 +120,16 @@ spec:
           value: production-microservice
         imagePullPolicy: Always
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
  name: mongo
 spec:
  replicas: 3
  serviceName: "mongo"
+ selector:
+    matchLabels:
+      app: mongo
  template:
    metadata:
      labels:
@@ -168,7 +171,7 @@ spec:
 
 ---
 # See https://github.com/cvallance/mongo-k8s-sidecar/issues/75
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: default-view
