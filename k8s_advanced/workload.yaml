@@ -129,7 +129,7 @@ spec:
  serviceName: "mongo"
  selector:
     matchLabels:
-      app: mongo
+      role: mongo
  template:
    metadata:
      labels:
