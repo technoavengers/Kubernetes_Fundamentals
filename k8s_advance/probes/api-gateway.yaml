@@ -19,6 +19,8 @@ spec:
           httpGet:
             path: /
             port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 3
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
