@@ -5,11 +5,11 @@ metadata:
   namespace: kube-system
 spec:
   rules:
-    - host: vehicle.technoavengers.click
+    - host: kibana.vehicle.technoavengers.click
       http:
         paths:
           - pathType: Prefix
-            path: /kibana
+            path: /
             backend:
               service:
                 name: kibana-logging
