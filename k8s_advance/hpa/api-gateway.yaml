@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: richardchesterwood/k8s-fleetman-api-gateway:resources
+        image: richardchesterwood/k8s-fleetman-api-gateway:performance
         readinessProbe:
           httpGet:
             path: /
@@ -23,7 +23,7 @@ spec:
           periodSeconds: 3
         resources:
           requests:
-            cpu: "50m"
+            cpu: "100m"
             memory: "500Mi"
         env:
         - name: SPRING_PROFILES_ACTIVE
