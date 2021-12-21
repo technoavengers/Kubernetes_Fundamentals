@@ -8,7 +8,8 @@ spec:
     - host: technoavengers.com
       http:
         paths:
-          - path: /kibana
+          - pathType: Prefix
+            path: /kibana
             backend:
               service:
                 name: kibana-logging
