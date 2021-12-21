@@ -76,7 +76,7 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: richardchesterwood/k8s-fleetman-api-gateway:release2
+        image: technoavengers/api-gateway:1.0.0 
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
@@ -98,7 +98,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: richardchesterwood/k8s-fleetman-webapp-angular:release2
+        image: technoavengers/vehicle-webapp:1.0.0
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
