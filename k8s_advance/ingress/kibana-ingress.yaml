@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kibana-routing
+  namespace: kube-system
+spec:
+  rules:
+    - host: technoavengers.com
+      http:
+        paths:
+          - path: /kibana
+            backend:
+              serviceName: kibana-logging
+              servicePort: 5601
