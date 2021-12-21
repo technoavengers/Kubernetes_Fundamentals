@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: kibana-routing
   namespace: kube-system
+  annotations:
+    kubernetes.io/ingress.class: nginx
 spec:
   rules:
     - host: kibana.vehicle.technoavengers.click
