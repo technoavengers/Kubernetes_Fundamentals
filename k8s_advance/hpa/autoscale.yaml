@@ -10,4 +10,4 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: api-gateway
-  targetCPUUtilizationPercentage: 200
+  targetCPUUtilizationPercentage: 80
