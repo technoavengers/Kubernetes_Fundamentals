@@ -4,7 +4,7 @@ metadata:
   name: webapp-routing
 spec:
   rules:
-    - host: technoavengers.com
+    - host: vehicle.technoavengers.click
       http:
         paths:
           - pathType: Prefix

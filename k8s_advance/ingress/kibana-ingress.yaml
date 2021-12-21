@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 spec:
   rules:
-    - host: technoavengers.com
+    - host: vehicle.technoavengers.click
       http:
         paths:
           - pathType: Prefix
