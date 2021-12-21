@@ -9,5 +9,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: fleetman-webapp
-              servicePort: 80
+              service: 
+                name: fleetman-webapp
+                port:
+                 number: 80
