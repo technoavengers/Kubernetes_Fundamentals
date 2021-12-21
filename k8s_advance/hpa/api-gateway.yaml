@@ -23,8 +23,8 @@ spec:
           periodSeconds: 3
         resources:
           requests:
-            cpu: 50Mi
-            memory: 500 Mi
+            cpu: "50m"
+            memory: "500Mi"
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
