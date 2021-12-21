@@ -32,12 +32,9 @@ spec:
   ports:
     - name: http
       port: 8161
-      nodePort: 30010
 
     - name: endpoint
       port: 61616
-
-  type: NodePort
 
 ---
 apiVersion: v1
@@ -74,6 +71,3 @@ spec:
   ports:
     - name: http
       port: 8080
-      nodePort: 30020
-
-  type: NodePort
