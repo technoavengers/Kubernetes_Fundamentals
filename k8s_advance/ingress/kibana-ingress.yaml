@@ -5,13 +5,15 @@ metadata:
   namespace: kube-system
   annotations:
     kubernetes.io/ingress.class: nginx
+    ingress.citrix.com/insecure-port: "5601"
+    ingress.citrix.com/insecure-service-type: "tcp"
 spec:
   rules:
-    - host: kibana.vehicle.technoavengers.click
+    - host: vehicle.technoavengers.click
       http:
         paths:
           - pathType: Prefix
-            path: /
+            path: /kibana
             backend:
               service:
                 name: kibana-logging
