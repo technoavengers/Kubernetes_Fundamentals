@@ -16,3 +16,14 @@ spec:
                 name: fleetman-webapp
                 port:
                  number: 80
+    - host: queue.vehicle.technoavengers.click
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service: 
+                name: fleetman-queue
+                port:
+                 number: 8161
+        
