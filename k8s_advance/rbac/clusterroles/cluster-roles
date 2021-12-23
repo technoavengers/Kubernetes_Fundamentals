@@ -1,0 +1,6 @@
+kubectl create namespace dev
+kubectl run pod --image 
+kubectl create namespace prod
+
+
+Give user 
