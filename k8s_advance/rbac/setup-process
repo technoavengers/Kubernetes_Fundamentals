@@ -1,0 +1,21 @@
+
+Create Key >> Create CSR >> API >> Admin Approve Signing request >> Download CRT from API >> Use CRT+ Key
+
+##########################################
+Step 1: Generate a key
+
+openssl genrsa -out nav.key 2048
+
+###########################################
+
+Step 2: Create a CSR (Certificate SIgning Request)
+
+openssl req -new -key nav.key -out nav.csr
+
+###########################################
+Step 3: Sign CSR using Kubernetes API
+
+
+###########################################
+Step 4: Use cert+key to connect to K8s API.
+
