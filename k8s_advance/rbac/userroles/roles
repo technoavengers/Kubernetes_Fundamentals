@@ -1,0 +1,3 @@
+kubectl create -n default role pod-manager --verb=get --verb=list --verb=delete --resource=pods --dry-run=client -oyaml > role.yaml
+kubectl create -n default rolebinding pod-manager --role=pod-manager --user=nav --dry-run=client -oyaml > rolebinding.yaml
+
