@@ -13,6 +13,11 @@ Step 2: Create a CSR (Certificate SIgning Request)
 openssl req -new -key nav.key -out nav.csr
 
 
+##### Sign CSR and get certificate
+
+
+
+
 ###########################################
 Step 3: Sign CSR using Kubernetes API
 

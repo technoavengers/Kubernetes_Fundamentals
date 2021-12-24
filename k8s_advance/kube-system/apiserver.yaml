@@ -1,0 +1,296 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    dns.alpha.kubernetes.io/internal: api.internal.technoavengers.k8s.local
+    kubectl.kubernetes.io/default-container: kube-apiserver
+    kubernetes.io/config.hash: 32090f19429fe3e213c7070bbdabbe64
+    kubernetes.io/config.mirror: 32090f19429fe3e213c7070bbdabbe64
+    kubernetes.io/config.seen: "2021-12-24T04:23:23.077258884Z"
+    kubernetes.io/config.source: file
+    scheduler.alpha.kubernetes.io/critical-pod: ""
+  creationTimestamp: "2021-12-24T04:25:06Z"
+  labels:
+    k8s-app: kube-apiserver
+  name: kube-apiserver-ip-172-20-37-121.ec2.internal
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: v1
+    controller: true
+    kind: Node
+    name: ip-172-20-37-121.ec2.internal
+    uid: c0b63292-7aa1-4f48-8d16-9b3aac7dd3df
+  resourceVersion: "602"
+  uid: 7784319c-2147-482e-8483-a6550c9b910e
+spec:
+  containers:
+  - args:
+    - --audit-policy-file=/etc/kubernetes/audit/policy.yaml       # add
+    - --audit-log-path=/etc/kubernetes/audit/logs/audit.log       # add
+    - --audit-log-maxsize=500                                     # add
+    - --audit-log-maxbackup=5                                     # add
+    - --allow-privileged=true
+    - --anonymous-auth=false
+    - --api-audiences=kubernetes.svc.default
+    - --apiserver-count=1
+    - --authorization-mode=Node,RBAC
+    - --bind-address=0.0.0.0
+    - --client-ca-file=/srv/kubernetes/ca.crt
+    - --cloud-config=/etc/kubernetes/in-tree-cloud.config
+    - --cloud-provider=aws
+    - --enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,NodeRestriction,ResourceQuota
+    - --etcd-cafile=/srv/kubernetes/kube-apiserver/etcd-ca.crt
+    - --etcd-certfile=/srv/kubernetes/kube-apiserver/etcd-client.crt
+    - --etcd-keyfile=/srv/kubernetes/kube-apiserver/etcd-client.key
+    - --etcd-servers-overrides=/events#https://127.0.0.1:4002
+    - --etcd-servers=https://127.0.0.1:4001
+    - --insecure-port=0
+    - --kubelet-client-certificate=/srv/kubernetes/kube-apiserver/kubelet-api.crt
+    - --kubelet-client-key=/srv/kubernetes/kube-apiserver/kubelet-api.key
+    - --kubelet-preferred-address-types=InternalIP,Hostname,ExternalIP
+    - --proxy-client-cert-file=/srv/kubernetes/kube-apiserver/apiserver-aggregator.crt
+    - --proxy-client-key-file=/srv/kubernetes/kube-apiserver/apiserver-aggregator.key
+    - --requestheader-allowed-names=aggregator
+    - --requestheader-client-ca-file=/srv/kubernetes/kube-apiserver/apiserver-aggregator-ca.crt
+    - --requestheader-extra-headers-prefix=X-Remote-Extra-
+    - --requestheader-group-headers=X-Remote-Group
+    - --requestheader-username-headers=X-Remote-User
+    - --secure-port=443
+    - --service-account-issuer=https://api.internal.technoavengers.k8s.local
+    - --service-account-jwks-uri=https://api.internal.technoavengers.k8s.local/openid/v1/jwks
+    - --service-account-key-file=/srv/kubernetes/kube-apiserver/service-account.pub
+    - --service-account-signing-key-file=/srv/kubernetes/kube-apiserver/service-account.key
+    - --service-cluster-ip-range=100.64.0.0/13
+    - --storage-backend=etcd3
+    - --tls-cert-file=/srv/kubernetes/kube-apiserver/server.crt
+    - --tls-private-key-file=/srv/kubernetes/kube-apiserver/server.key
+    - --v=2
+    - --logtostderr=false
+    - --alsologtostderr
+    - --log-file=/var/log/kube-apiserver.log
+    command:
+    - /usr/local/bin/kube-apiserver
+    image: k8s.gcr.io/kube-apiserver:v1.22.4
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        host: 127.0.0.1
+        path: /healthz
+        port: 3990
+        scheme: HTTP
+      initialDelaySeconds: 45
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 15
+    name: kube-apiserver
+    ports:
+    - containerPort: 443
+      hostPort: 443
+      name: https
+      protocol: TCP
+    resources:
+      requests:
+        cpu: 150m
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/log/kube-apiserver.log
+      name: logfile
+    - mountPath: /etc/ssl
+      name: etcssl
+      readOnly: true
+    - mountPath: /etc/pki/tls
+      name: etcpkitls
+      readOnly: true
+    - mountPath: /etc/pki/ca-trust
+      name: etcpkica-trust
+      readOnly: true
+    - mountPath: /usr/share/ssl
+      name: usrsharessl
+      readOnly: true
+    - mountPath: /usr/ssl
+      name: usrssl
+      readOnly: true
+    - mountPath: /usr/lib/ssl
+      name: usrlibssl
+      readOnly: true
+    - mountPath: /usr/local/openssl
+      name: usrlocalopenssl
+      readOnly: true
+    - mountPath: /var/ssl
+      name: varssl
+      readOnly: true
+    - mountPath: /etc/openssl
+      name: etcopenssl
+      readOnly: true
+    - mountPath: /etc/kubernetes/in-tree-cloud.config
+      name: cloudconfig
+      readOnly: true
+    - mountPath: /srv/kubernetes/ca.crt
+      name: kubernetesca
+      readOnly: true
+    - mountPath: /srv/kubernetes/kube-apiserver
+      name: srvkapi
+      readOnly: true
+    - mountPath: /srv/sshproxy
+      name: srvsshproxy
+      readOnly: true
+  - args:
+    - --ca-cert=/secrets/ca.crt
+    - --client-cert=/secrets/client.crt
+    - --client-key=/secrets/client.key
+    command:
+    - /kube-apiserver-healthcheck
+    image: k8s.gcr.io/kops/kube-apiserver-healthcheck:1.22.2
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        host: 127.0.0.1
+        path: /.kube-apiserver-healthcheck/healthz
+        port: 3990
+        scheme: HTTP
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    name: healthcheck
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /secrets
+      name: healthcheck-secrets
+      readOnly: true
+    - mountPath: /etc/kubernetes/audit      # add
+      name: audit                           # add
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostNetwork: true
+  nodeName: ip-172-20-37-121.ec2.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 2000000000
+  priorityClassName: system-cluster-critical
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - key: CriticalAddonsOnly
+    operator: Exists
+  - effect: NoExecute
+    operator: Exists
+  volumes:
+  - hostPath:                               # add
+      path: /etc/kubernetes/audit           # add
+      type: DirectoryOrCreate               # add
+    name: audit                             # add
+  - hostPath:
+      path: /var/log/kube-apiserver.log
+      type: ""
+    name: logfile
+  - hostPath:
+      path: /etc/ssl
+      type: ""
+    name: etcssl
+  - hostPath:
+      path: /etc/pki/tls
+      type: ""
+    name: etcpkitls
+  - hostPath:
+      path: /etc/pki/ca-trust
+      type: ""
+    name: etcpkica-trust
+  - hostPath:
+      path: /usr/share/ssl
+      type: ""
+    name: usrsharessl
+  - hostPath:
+      path: /usr/ssl
+      type: ""
+    name: usrssl
+  - hostPath:
+      path: /usr/lib/ssl
+      type: ""
+    name: usrlibssl
+  - hostPath:
+      path: /usr/local/openssl
+      type: ""
+    name: usrlocalopenssl
+  - hostPath:
+      path: /var/ssl
+      type: ""
+    name: varssl
+  - hostPath:
+      path: /etc/openssl
+      type: ""
+    name: etcopenssl
+  - hostPath:
+      path: /etc/kubernetes/in-tree-cloud.config
+      type: ""
+    name: cloudconfig
+  - hostPath:
+      path: /srv/kubernetes/ca.crt
+      type: ""
+    name: kubernetesca
+  - hostPath:
+      path: /srv/kubernetes/kube-apiserver
+      type: ""
+    name: srvkapi
+  - hostPath:
+      path: /srv/sshproxy
+      type: ""
+    name: srvsshproxy
+  - hostPath:
+      path: /etc/kubernetes/kube-apiserver-healthcheck/secrets
+      type: Directory
+    name: healthcheck-secrets
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2021-12-24T04:23:23Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2021-12-24T04:23:53Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2021-12-24T04:23:53Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2021-12-24T04:23:23Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://6ec627e12d416c1bbb05adc530690d6ba5bf9b5f525e68a2eab6bfb45f563220
+    image: k8s.gcr.io/kops/kube-apiserver-healthcheck:1.22.2
+    imageID: k8s.gcr.io/kops/kube-apiserver-healthcheck@sha256:56f03020d1d714df05f515c358dafaac589fa51d1b6b3f18fedd4e8a52702201
+    lastState: {}
+    name: healthcheck
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2021-12-24T04:23:52Z"
+  - containerID: containerd://81b01aae84b42cd4aae8c739e45833cdf2d3307dc1b778c7118e555b1602f882
+    image: k8s.gcr.io/kube-apiserver:v1.22.4
+    imageID: k8s.gcr.io/kube-apiserver@sha256:c52183c0c9cd24f0349d36607c95c9d861df569c568877ddf5755e8e8364c110
+    lastState: {}
+    name: kube-apiserver
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2021-12-24T04:23:47Z"
+  hostIP: 172.20.37.121
+  phase: Running
+  podIP: 172.20.37.121
+  podIPs:
+  - ip: 172.20.37.121
+  qosClass: Burstable
+  startTime: "2021-12-24T04:23:23Z"
