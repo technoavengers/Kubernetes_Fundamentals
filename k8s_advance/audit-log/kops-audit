@@ -1,0 +1,16 @@
+ kubeAPIServer:
+    auditLogMaxAge: 10
+    auditLogMaxBackups: 1
+    auditLogMaxSize: 100
+    auditLogPath: /var/log/kube-apiserver-audit.log
+    auditPolicyFile: /srv/kubernetes/kube-apiserver/audit-policy-config.yaml
+  fileAssets:
+  - name: audit-policy-config
+    path: /srv/kubernetes/kube-apiserver/audit-policy-config.yaml
+    roles:
+    - Master
+    content: |
+      apiVersion: audit.k8s.io/v1
+      kind: Policy
+      rules:
+      - level: Metadata
