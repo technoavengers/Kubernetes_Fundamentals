@@ -2,15 +2,15 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    run: demo3
-  name: demo3
+    run: demo4
+  name: demo4
 spec:
   containers:
   - args:
     - sleep
     - "100000"
     image: busybox
-    name: demo3
+    name: demo4
     resources: {}
     securityContext:
      runAsNonRoot: true
