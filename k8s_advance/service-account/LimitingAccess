@@ -1,0 +1,18 @@
+kubectl create sa secret-manager
+
+kubectl auth can-i delete secrets --as system:serviceaccount:default:secret-manager
+
+kubectl create clusterrole secret-deleter --verb delete --resource secrets
+
+kubectl create clusterrolebinding secret-deleter --clusterrole secret-deleter --serviceaccount default:secret-manager
+
+
+kubectl create -f SecretManager.yaml
+
+kubectl describe pod secret-accessor
+
+kubectl exec -it secret-accessor sh
+
+curl https://Kubernetes -k
+
+curl https://Kubernetes -k -H "Authorization:Bearer {token}"

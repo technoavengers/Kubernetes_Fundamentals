@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: demo3
+  name: demo3
+spec:
+  securityContext:
+   runAsUser: 1000
+   runAsGroup: 2000
+   fsGroup: 3000
+  containers:
+  - args:
+    - sleep
+    - "100000"
+    image: busybox
+    name: demo3
+    resources: {}
+    securityContext:
+     runAsNonRoot: true

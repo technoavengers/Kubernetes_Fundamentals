@@ -1,0 +1,32 @@
+## Demo 1 - Without Security Context
+Create a busybox pod without security context
+Go inside the pod and check the user and group
+Create a file and check its user and group
+
+kubectl create -f demo1.yaml
+kubectl exec -it demo1 sh
+id
+touch file1
+ls -ltr
+
+## Demo 2 - With Security Context
+Now create a new pod using security context with non-root user and group
+Go inside the container,, check the id and create a file
+Go inside the /tmp directory and create file
+Check its users and group
+
+kubectl create -f demo2.yaml
+kubectl exec -it demo2 sh
+id
+touch file1
+cd /tmp
+touch file1
+ls -ltr
+
+## Demo 3 - Force container as Non-root
+Now create a new pod using security context with non-root user and group
+Go inside the container,, check the id and create a file
+Go inside the /tmp directory and create file
+Check its users and group
+
+
