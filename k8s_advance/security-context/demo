@@ -24,9 +24,21 @@ touch file1
 ls -ltr
 
 ## Demo 3 - Force container as Non-root
-Now create a new pod using security context with non-root user and group
-Go inside the container,, check the id and create a file
-Go inside the /tmp directory and create file
-Check its users and group
+kubectl create -f demo3.yaml
+kubectl get pod
+
+kubectl create -f demo4.yaml
+kubectl get pod
+kubectl describe pod demo4
+
+## Demo 4 - Privileged container
+kubectl exec -it demo3 sh
+sysctl kernel.hostname=attacker
+
+
+
+
+
+
 
 
