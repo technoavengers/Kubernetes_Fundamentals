@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: demo1
+  name: demo1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loadBalancer
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: loadBalancer
+    spec:
+      containers:
+        - image: nginx
+          name: nginx
