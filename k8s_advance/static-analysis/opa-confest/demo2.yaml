@@ -6,13 +6,13 @@ metadata:
   name: demo1
 spec:
   replicas: 1
-  securityContext:
-    runAsNonRoot: true
   selector:
     matchLabels:
       app: loadBalancer
   strategy: {}
   template:
+    securityContext:
+      runAsNonRoot: true
     metadata:
       labels:
         app: loadBalancer
