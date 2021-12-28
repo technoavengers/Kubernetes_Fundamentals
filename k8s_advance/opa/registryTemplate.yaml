@@ -15,5 +15,5 @@ spec:
           image := input.review.object.spec.containers[_].image
           not startswith(image, "docker.io/")
           not startswith(image, "k8s.gcr.io/")
-          msg := "Image %v  is not trusted!,[image]"
+          msg := sprintf("Image %v  is not trusted!",[image])
         }
