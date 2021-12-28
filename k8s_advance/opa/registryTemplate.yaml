@@ -1,0 +1,28 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: allowedRegistry
+spec:
+  crd:
+    spec:
+      names:
+        kind: AllowedRegistry
+      validation:
+        openAPIV3Schema:
+          properties:
+            registry:
+              type: array
+              items: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package AllowedRegistry
+        import future.keywords.in
+        violation[{"msg": msg, "details": {"blocked_registry": registry}}] {
+          some container in input.review.object.spec.containers
+          provided := {label | input.review.object.container.image}
+          allowed := {label | label := input.parameters.registry[_]}
+          blocked := allowed - provided
+          count(blocked) > 0
+          msg := sprintf("Allowed registries are : %v", [blocked])
+        }
