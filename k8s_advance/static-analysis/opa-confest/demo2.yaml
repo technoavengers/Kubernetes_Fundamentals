@@ -11,12 +11,12 @@ spec:
       app: loadBalancer
   strategy: {}
   template:
-    securityContext:
-      runAsNonRoot: true
     metadata:
       labels:
         app: loadBalancer
     spec:
+      securityContext:
+        runAsNonRoot: true
       containers:
         - image: nginx
           name: nginx
