@@ -1,0 +1,7 @@
+sudo docker run ghcr.io/aquasecurity/trivy:latest image nginx:latest
+
+sudo docker run ghcr.io/aquasecurity/trivy:latest image nginx:latest | grep CRITICAL
+
+sudo docker run ghcr.io/aquasecurity/trivy:latest image nginx:1.16-alpine
+
+sudo docker run ghcr.io/aquasecurity/trivy:latest image nginx:1.18-alpine
