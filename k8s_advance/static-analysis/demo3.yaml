@@ -5,13 +5,12 @@ metadata:
     run: demo2
   name: demo2
 spec:
-  securityContext:
-   runAsUser: 20000
   containers:
   - image: docker.io/nginx
     name: demo1
     securityContext:
      runAsNonRoot: true
+     runAsUser: 20000
      readOnlyRootFilesystem: true
     resources:
       requests:
