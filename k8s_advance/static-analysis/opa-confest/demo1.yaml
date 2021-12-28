@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: loadBalancer
+      app: loadBalancer1
   strategy: {}
   template:
     metadata:
