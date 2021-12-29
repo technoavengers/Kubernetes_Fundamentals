@@ -15,3 +15,6 @@ spec:
     - podSelector:
         matchLabels:
           app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
