@@ -28,6 +28,8 @@ kind: Service
 apiVersion: v1
 metadata:
   name: fleetman-mongodb
+  labels:
+    app: mongodb-service
 spec:
   selector:
     app: mongodb

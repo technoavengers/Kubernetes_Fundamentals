@@ -10,6 +10,5 @@ spec:
     name: demo1
     securityContext:
      runAsNonRoot: true
-    resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Always

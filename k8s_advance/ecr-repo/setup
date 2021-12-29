@@ -1,0 +1,7 @@
+Add AWSAppRunnerServicePolicyForECRAccess role to current user
+
+kubectl create secret docker-registry myprivate-registry --docker-server=418988682717.dkr.ecr.us-east-1.amazonaws.com --docker-username=AWS --docker-password=$(aws ecr get-login-password) --namespace=default
+
+kubectl patch serviceaccount default -p '{"imagePullSecrets":[{"name":"myprivate-registry"}]}'
+
+kubectl run private --image=418988682717.dkr.ecr.us-east-1.amazonaws.com/myimage

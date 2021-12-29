@@ -15,7 +15,7 @@ openssl req -new -key nav.key -out nav.csr
 
 ##### Sign CSR and get certificate
 
-
+openssl x509 -req -in nav.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key  -CAcreateserial -out nav.crt -days 20
 
 
 ###########################################
