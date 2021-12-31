@@ -1,0 +1,13 @@
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+helm install monitoring prometheus-community/kube-prometheus-stack
+
+helm show values prometheus-community/kube-prometheus-stack
+
+helm upgrade  monitoring prometheus-community/kube-prometheus-stack --set grafana.service.type=LoadBalancer
+
+helm uninstall monitoring
+
+helm pull prometheus-community/kube-prometheus-stack --untar=true
+

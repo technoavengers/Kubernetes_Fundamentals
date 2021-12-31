@@ -1,0 +1,3 @@
+grafana:
+   service:
+     type: LoadBalancer
