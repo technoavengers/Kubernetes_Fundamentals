@@ -22,4 +22,4 @@ spec:
         image: navjoy220161/node-mongo:green
         envFrom:
         - configMapRef:
-          name: app-config-new
+           name: app-config-new
