@@ -15,7 +15,7 @@ spec:
       labels:
         type: frontend
         release: blue-green
-        version: blue
+        version: green
     spec:
       containers:
       - name: nodeapp-container
