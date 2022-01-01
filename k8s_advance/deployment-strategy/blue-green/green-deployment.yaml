@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mywebapp
-  labels:
-    type: frontend
+  name: nodeapp
 spec:
+  replicas: 3
   selector:
     matchLabels:
       type: frontend
       release: blue-green
-      version: blue
-  replicas: 3
+      version: green
   template:
     metadata:
-      name: mywebapp
+      name: nodeapp-pod
       labels:
         type: frontend
         release: blue-green
         version: blue
     spec:
       containers:
-        - name: mywebapp
-          image: navjoy220161/node-mongo:blue
-
+      - name: nodeapp-container
+        image: navjoy220161/node-mongo:green
+        envFrom:
+        - configMapRef:
+          name: app-config-new
