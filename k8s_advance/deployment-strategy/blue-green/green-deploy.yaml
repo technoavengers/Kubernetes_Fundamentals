@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebapp
+  labels:
+    type: frontend
+spec:
+  selector:
+    matchLabels:
+      type: frontend
+      release: blue-green
+      version: green
+  replicas: 3
+  template:
+    metadata:
+      name: mywebapp
+      labels:
+        type: frontend
+        release: blue-green
+        version: green
+    spec:
+      containers:
+        - name: mywebapp
+          image: navjoy220161/node-mongo:greener
+
