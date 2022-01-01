@@ -1,5 +1,4 @@
 kubectl create -f app-configmap.yaml
-kubectl create -f mongo-secret.yaml
 kubectl create -f mongodb-deployment.yaml
 kubectl create -f mongodb-service.yaml
 sleep 10
