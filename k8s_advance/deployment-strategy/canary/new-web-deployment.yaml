@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-new
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: frontend
+      release: canary
+  template:
+    metadata:
+      name: nodeapp-pod
+      labels:
+        type: frontend
+        release: canary
+    spec:
+      containers:
+      - name: nodeapp-container
+        image: navjoy220161/node-mongo:new
+        envFrom:
+        - configMapRef:
+           name: app-configmap

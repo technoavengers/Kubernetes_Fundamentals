@@ -2,7 +2,7 @@ version: '3'
 services:
   app:
     container_name: docker-node-mongo
-    image: navjoy220161/node-mongo
+    image: navjoy220161/node-mongo:v2
     ports:
       - '8083:3000'
     external_links:
