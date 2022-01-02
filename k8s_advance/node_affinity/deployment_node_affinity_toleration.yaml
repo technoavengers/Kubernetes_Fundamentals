@@ -29,7 +29,7 @@ spec:
         - key: "app"
           operator: "Equal"
           value: "blue"
-          effect: "NoSchedule"
+          effect: "NoExecute"
   replicas: 6
   selector:
     matchLabels:
