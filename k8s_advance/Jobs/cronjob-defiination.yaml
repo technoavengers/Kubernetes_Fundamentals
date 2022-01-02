@@ -1,0 +1,20 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: schedule-cron-job
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      completions: 3
+      parallelism: 3
+      template:
+        metadata:
+          name: ubuntu-add-pod
+        spec:
+          containers:
+          - name: ubuntu-add-container
+            image: ubuntu
+            command: ['expr','3','+','2']
+          restartPolicy: Never
+
