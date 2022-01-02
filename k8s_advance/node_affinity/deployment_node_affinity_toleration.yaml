@@ -25,7 +25,7 @@ spec:
                 values:
                 - large
                 - medium
-        tolerations:
+      tolerations:
         - key: "app"
           operator: "Equal"
           value: "blue"
