@@ -3,7 +3,7 @@ kind: Job
 metadata:
   name: math-add-job1
 spec:
-  completions: 3
+  completions: 18
   parallelism: 3
   template:
     metadata:
