@@ -1,4 +1,4 @@
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: schedule-cron-job
@@ -6,7 +6,7 @@ spec:
   schedule: "*/1 * * * *"
   jobTemplate:
     spec:
-      completions: 3
+      completions: 10
       parallelism: 3
       template:
         metadata:
@@ -15,6 +15,6 @@ spec:
           containers:
           - name: ubuntu-add-container
             image: ubuntu
-            command: ['expr','3','+','2']
+            command: ["sleep 5"]
           restartPolicy: Never
 
