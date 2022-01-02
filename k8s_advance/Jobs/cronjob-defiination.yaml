@@ -10,11 +10,12 @@ spec:
       parallelism: 3
       template:
         metadata:
-          name: ubuntu-add-pod
+          name: ubuntu-print
         spec:
           containers:
-          - name: ubuntu-add-container
+          - name: ubuntu-print
             image: ubuntu
-            command: ["sleep 5"]
+            command: ["/bin/echo"]
+            args: ["Hello"]
           restartPolicy: Never
 
