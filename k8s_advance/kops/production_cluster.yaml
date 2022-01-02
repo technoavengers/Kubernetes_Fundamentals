@@ -1,0 +1,219 @@
+apiVersion: kops/v1alpha2
+kind: Cluster
+metadata:
+  creationTimestamp: 2018-03-17T09:37:40Z
+  name: useast1.prod.kubernetes.technoavengers.com
+spec:
+  additionalPolicies:
+    node: |
+      [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "autoscaling:DescribeAutoScalingGroups",
+            "autoscaling:DescribeAutoScalingInstances",
+            "autoscaling:DescribeTags",
+            "autoscaling:DescribeLaunchConfigurations",
+            "autoscaling:SetDesiredCapacity",
+            "autoscaling:TerminateInstanceInAutoScalingGroup"
+          ],
+          "Resource": "*"
+        }
+      ]
+  api:
+    loadBalancer:
+      type: Internal
+  authorization:
+    rbac: {}
+  channel: stable
+  cloudProvider: aws
+  configBase: s3://clusters.kubernetes.technoavengers.com/useast1.prod.kubernetes.technoavengers.com
+  dnsZone: useast1.prod.kubernetes.technoavengers.com
+  etcdClusters:
+  - etcdMembers:
+    - instanceGroup: master-us-east-1a
+      name: a
+    - instanceGroup: master-us-east-1b
+      name: b
+    - instanceGroup: master-us-east-1c
+      name: c
+    name: main
+  - etcdMembers:
+    - instanceGroup: master-us-east-1a
+      name: a
+    - instanceGroup: master-us-east-1b
+      name: b
+    - instanceGroup: master-us-east-1c
+      name: c
+    name: events
+  iam:
+    allowContainerRegistry: true
+    legacy: false
+  kubeDNS:
+    provider: CoreDNS
+  kubelet:
+    featureGates:
+      ExpandPersistentVolumes: "true"
+      PodPriority: "true"
+  kubernetesApiAccess:
+  - 0.0.0.0/0
+  kubernetesVersion: 1.11.6
+  masterInternalName: api.internal.useast1.prod.kubernetes.technoavengers.com
+  masterPublicName: api.useast1.prod.kubernetes.technoavengers.com
+  networkCIDR: 172.22.0.0/16
+  networking:
+    calico:
+      logSeverityScreen: warning
+  nonMasqueradeCIDR: 100.64.0.0/10
+  sshAccess:
+  - 0.0.0.0/0
+  subnets:
+  - cidr: 172.22.32.0/19
+    name: us-east-1a
+    type: Private
+    zone: us-east-1a
+  - cidr: 172.22.64.0/19
+    name: us-east-1b
+    type: Private
+    zone: us-east-1b
+  - cidr: 172.22.96.0/19
+    name: us-east-1c
+    type: Private
+    zone: us-east-1c
+  - cidr: 172.22.0.0/22
+    name: utility-us-east-1a
+    type: Utility
+    zone: us-east-1a
+  - cidr: 172.22.4.0/22
+    name: utility-us-east-1b
+    type: Utility
+    zone: us-east-1b
+  - cidr: 172.22.8.0/22
+    name: utility-us-east-1c
+    type: Utility
+    zone: us-east-1c
+  topology:
+    dns:
+      type: Public
+    masters: private
+    nodes: private
+---
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: 2018-03-12T09:37:40Z
+  labels:
+    kops.k8s.io/cluster: useast1.prod.kubernetes.technoavengers.com
+  name: master-us-east-1a
+spec:
+  image: kope.io/k8s-1.11-debian-stretch-amd64-hvm-ebs-2018-08-17
+  machineType: m5.large
+  maxSize: 1
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: master-us-east-1a
+  role: Master
+  subnets:
+  - us-east-1a
+---
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: 2018-03-12T09:37:41Z
+  labels:
+    kops.k8s.io/cluster: useast1.prod.kubernetes.technoavengers.com
+  name: master-us-east-1b
+spec:
+  image: kope.io/k8s-1.11-debian-stretch-amd64-hvm-ebs-2018-08-17
+  machineType: m5.large
+  maxSize: 1
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: master-us-east-1b
+  role: Master
+  subnets:
+  - us-east-1b
+---
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: 2018-03-12T09:37:41Z
+  labels:
+    kops.k8s.io/cluster: useast1.prod.kubernetes.technoavengers.com
+  name: master-us-east-1c
+spec:
+  image: kope.io/k8s-1.11-debian-stretch-amd64-hvm-ebs-2018-08-17
+  machineType: m5.large
+  maxSize: 1
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: master-us-east-1c
+  role: Master
+  subnets:
+  - us-east-1c
+---
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: 2018-08-08T13:35:12Z
+  labels:
+    kops.k8s.io/cluster: useast1.prod.kubernetes.technoavengers.com
+  name: nodes-us-east-1a
+spec:
+  cloudLabels:
+    k8s.io/cluster-autoscaler/enabled: "true"
+    kubernetes.io/cluster/useast1.prod.kubernetes.technoavengers.com: "true"
+  image: kope.io/k8s-1.11-debian-stretch-amd64-hvm-ebs-2018-08-17
+  machineType: m5.xlarge
+  maxPrice: "0.22"
+  maxSize: 5
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: nodes-us-east-1a
+  role: Node
+  subnets:
+  - us-east-1a
+---
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: 2018-08-08T13:35:12Z
+  labels:
+    kops.k8s.io/cluster: useast1.prod.kubernetes.technoavengers.com
+  name: nodes-us-east-1b
+spec:
+  cloudLabels:
+    k8s.io/cluster-autoscaler/enabled: "true"
+    kubernetes.io/cluster/useast1.prod.kubernetes.technoavengers.com: "true"
+  image: kope.io/k8s-1.11-debian-stretch-amd64-hvm-ebs-2018-08-17
+  machineType: m5.xlarge
+  maxPrice: "0.22"
+  maxSize: 5
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: nodes-us-east-1b
+  role: Node
+  subnets:
+  - us-east-1b
+---
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: 2018-08-08T13:35:13Z
+  labels:
+    kops.k8s.io/cluster: useast1.prod.kubernetes.technoavengers.com
+  name: nodes-us-east-1c
+spec:
+  cloudLabels:
+    k8s.io/cluster-autoscaler/enabled: "true"
+    kubernetes.io/cluster/useast1.prod.kubernetes.technoavengers.com: "true"
+  image: kope.io/k8s-1.11-debian-stretch-amd64-hvm-ebs-2018-08-17
+  machineType: m5.xlarge
+  maxPrice: "0.22"
+  maxSize: 5
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: nodes-us-east-1c
+  role: Node
+  subnets:
+  - us-east-1c

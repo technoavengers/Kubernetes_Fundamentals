@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-limit
+spec:
+  containers:
+  - name: default-pod
+    image: nginx
+    resources:
+      limits:
+        memory: "1Gi"
