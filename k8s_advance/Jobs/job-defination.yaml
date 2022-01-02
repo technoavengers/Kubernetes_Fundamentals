@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: math-add-job2
+  name: math-add-job3
 spec:
   completions: 18
   parallelism: 3
