@@ -1,7 +1,0 @@
-kubectl set image deployment/mywebapp nodeapp=node-mongo:v2          
-kubectl rollout history deployment/mywebapp                      
-kubectl rollout undo deployment/mywebapp                        
-kubectl rollout undo deployment/mywebapp --to-revision=2         
-kubectl rollout status -w deployment/mywebapp                   
-kubectl rollout restart deployment/mywebapp 
-kubectl rollout history deployment/mywebapp --revision=v1

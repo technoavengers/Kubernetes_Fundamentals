@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebapp
+  labels:
+    location: us
+    type: frontend-deployment
+spec:
+  template:
+    metadata:
+      name: myapp
+      labels:
+        type: frontend
+    spec:
+      containers:
+        - name: httpd
+          image: httpd
+          tolerations:
+          - key: "app"
+            operator: "Equal"
+            value: "blue"
+            effect: "NoSchedule"
+  replicas: 3
+  selector:
+    matchLabels:
+      type: frontend
+

@@ -1,0 +1,2 @@
+kubectl taint node docker-desktop app=blue:NoSchedule
+kubectl taint --all node app=blue:NoSchedule-

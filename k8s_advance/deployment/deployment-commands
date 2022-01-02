@@ -1,0 +1,21 @@
+kubectl rollout history deployment/mywebapp
+kubectl rollout history deployment/mywebapp --revision=1
+kubectl set image deployment/mywebapp nodeapp-container=node-mongo:v2 --record
+kubectl create deployment mywebapp --image=navjoy220161/node-mongo:v2 --replicas=3
+
+kubectl rollout status -w deployment/mywebapp 
+kubectl rollout undo deployment/mywebapp 
+
+kubectl set image deployment/mywebapp nodeapp-container=navjoy220161/node-mongo:v2 --record 
+kubectl rollout history deployment/mywebapp                      
+
+
+kubectl set image deployment/mywebapp nodeapp-container=navjoy220161/node-mongo:v3 --record
+kubectl rollout undo deployment/mywebapp --to-revision=3
+
+kubectl scale --replicas=2 -f deployment.yaml                  
+kubectl rollout restart deployment/mywebapp 
+
+kubectl rollout pause deployment/mywebapp 
+kubectl set image deployment/mywebapp nodeapp-container=navjoy220161/node-mongo:v3 --record
+kubectl rollout resume deployment/mywebapp 
