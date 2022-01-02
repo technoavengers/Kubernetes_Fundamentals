@@ -1,0 +1,2 @@
+ kubectl drain <node_name> --ignore-daemonsets
+kubectl uncordon <node_name>
