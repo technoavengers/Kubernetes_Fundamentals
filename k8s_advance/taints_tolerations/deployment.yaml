@@ -15,7 +15,7 @@ spec:
       containers:
         - name: httpd
           image: httpd
-  replicas: 3
+  replicas: 6
   selector:
     matchLabels:
       type: frontend

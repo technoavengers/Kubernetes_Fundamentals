@@ -15,11 +15,11 @@ spec:
       containers:
         - name: httpd
           image: httpd
-          tolerations:
-          - key: "app"
-            operator: "Equal"
-            value: "blue"
-            effect: "NoSchedule"
+      tolerations:
+      - key: "app"
+        operator: "Equal"
+        value: "blue"
+        effect: "NoSchedule"
   replicas: 3
   selector:
     matchLabels:
