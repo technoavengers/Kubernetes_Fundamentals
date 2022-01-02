@@ -1,17 +1,17 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: math-add-job4
+  name: myjob
 spec:
   completions: 9
   parallelism: 3
   template:
     metadata:
-      name: ubuntu-add-pod
+      name: myjob
     spec:
       containers:
-      - name: ubuntu-add-container
+      - name: myjob
         image: ubuntu
         command: ["/bin/sh"]
-        args: ["-c", "while true; do echo hello; sleep 10;done"]
+        args: ["-c", "'expr','3','+','2'","sleep 3"]
       restartPolicy: Never
