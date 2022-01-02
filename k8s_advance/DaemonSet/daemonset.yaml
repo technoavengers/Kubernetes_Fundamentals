@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: httpd-container
+spec:
+  selector:
+    matchLabels:
+      name: frontend
+  template:
+    metadata:
+      labels:
+        name: frontend
+    spec:
+      containers:
+      - name: httpd-container
+        image: httpd
