@@ -1,0 +1,5 @@
+ kubectl exec -it mongo-0 sh
+ apt-get install dnsutils
+ nslookup mongodb-h
+ nslookup mongodb-service
+ nslookup mongo-0.mongodb-h.default.svc.cluster.local
