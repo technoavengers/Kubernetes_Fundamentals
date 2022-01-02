@@ -1,17 +1,17 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: myjob1
+  name: myjob
 spec:
   completions: 9
   parallelism: 3
   template:
     metadata:
-      name: myjob1
+      name: myjob
     spec:
       containers:
-      - name: myjob1
+      - name: myjob
         image: ubuntu
         command: ["/bin/sh"]
-        args: ["-c", "sleep 3"]
+        args: ["-c", "'expr','3','+','2'","sleep 3"]
       restartPolicy: Never
