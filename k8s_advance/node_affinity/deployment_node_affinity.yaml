@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebapp-nodeselctor
+  labels:
+    location: us
+    type: frontend-deployment
+spec:
+  template:
+    metadata:
+      name: myapp
+      labels:
+        type: frontend
+    spec:
+      containers:
+        - name: httpd
+          image: httpd
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: size
+                operator: In
+                values:
+                - large
+                - medium
+  replicas: 6
+  selector:
+    matchLabels:
+      type: frontend
+
+

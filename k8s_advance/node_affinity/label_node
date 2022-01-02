@@ -1,1 +1,3 @@
-kubectl label node docker-desktop size=large
+kubectl label node ip-172-20-100-26.ec2.internal  size=large
+
+kubectl label --all node size-
