@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongo-pvc
+  name: mongo-pvc-dyanmic
 spec:
   storageClassName: cloud-ssd
   accessModes:
