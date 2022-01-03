@@ -21,4 +21,4 @@ spec:
       volumes:
         - name: mongo-persistent-storage
           persistentVolumeClaim:
-            claimName: mongo-pvc-ebs
+            claimName: mongo-pvc-storage-class
