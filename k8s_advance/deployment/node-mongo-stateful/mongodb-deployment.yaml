@@ -26,6 +26,7 @@ spec:
   - metadata:
       name: mongo-pvc2
     spec:
+      storageClassName: cloud-ssd
       accessModes:
         - ReadWriteOnce
       resources:
