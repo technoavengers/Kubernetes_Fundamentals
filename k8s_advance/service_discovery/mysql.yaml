@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydatabase
+  labels:
+    type: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     type: backend
+  template:
+    metadata:
+      name: mydatabase
+      labels:
+        type: backend
+    spec:
+      containers:
+        - name: mysql
+          image: mysql
+          env:
+           - name:  MYSQL_ROOT_PASSWORD
+             value: password
+           
+

@@ -1,0 +1,2 @@
+cd /etc/resolv.conf
+nslookup mysqlservice
