@@ -1,21 +1,62 @@
-kubectl rollout history deployment/mywebapp
-kubectl rollout history deployment/mywebapp --revision=1
-kubectl set image deployment/mywebapp nodeapp-container=node-mongo:v2 --record
+############## Create Deployment #######################################
+
 kubectl create deployment mywebapp --image=navjoy220161/node-mongo:v2 --replicas=3
 
+############# Working with Deployment ##########################################
+
+1. Checkout the rollout history 
+kubectl rollout history deployment/mywebapp
+
+2. Check out the details of revision 1
+kubectl rollout history deployment/mywebapp --revision=1
+
+3. Rollout a newer version 
+kubectl set image deployment/mywebapp nodeapp-container=node-mongo:v2 --record
+
+4. Check out the status of rollout
 kubectl rollout status -w deployment/mywebapp 
+
+5. Undo the previous rollout
 kubectl rollout undo deployment/mywebapp 
 
+6. Rollout with correct image name
 kubectl set image deployment/mywebapp nodeapp-container=navjoy220161/node-mongo:v2 --record 
+
+7. Check the rollout history
 kubectl rollout history deployment/mywebapp                      
 
-
+8. Rollout another deployment version
 kubectl set image deployment/mywebapp nodeapp-container=navjoy220161/node-mongo:v3 --record
+
+
+9. Undo the rollout to revision 3
 kubectl rollout undo deployment/mywebapp --to-revision=3
 
-kubectl scale --replicas=2 -f deployment.yaml                  
+10. Pause the rollout process
+kubectl rollout pause deployment/mywebapp
+
+11. Rollout a new version
+kubectl set image deployment/mywebapp nodeapp-container=navjoy220161/node-mongo:v3 --record
+
+12. Check status of Rollout
+kubectl rollout status -w deployment/mywebapp 
+
+13. Resume the rollout
+kubectl rollout resume deployment/mywebapp 
+
+14. Scale down the replicas to 2
+kubectl scale --replicas=2 -f deployment.yaml  
+
+15. Scale up the replicas to 8
+kubectl scale --replicas=8 -f deployment.yaml
+
+16. Change the configmap APP_PORT to 5000
+kubectl edit configmap app-configmap
+
+17. Go inside the Pod and check env
+
+18. Restart the deployment
 kubectl rollout restart deployment/mywebapp 
 
-kubectl rollout pause deployment/mywebapp 
-kubectl set image deployment/mywebapp nodeapp-container=navjoy220161/node-mongo:v3 --record
-kubectl rollout resume deployment/mywebapp 
+19. Go inside the Pod and check env
+
