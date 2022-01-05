@@ -10,4 +10,4 @@ kops create cluster \
     ${NAME}
 ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa
 kops create secret --name ${NAME} sshpublickey admin -i ~/.ssh/id_rsa.pub
-kops update cluster --name technoavengers.k8s.local --yes --admin=87600h
+kops update cluster --name ${NAME} --yes --admin=87600h
