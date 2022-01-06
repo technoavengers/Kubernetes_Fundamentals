@@ -1,3 +1,6 @@
+kubectl drain ip-172-20-97-209.ec2.internal  --ignore-daemonsets
+kubectl uncordon ip-172-20-97-209.ec2.internal 
+
 kubectl taint node ip-172-20-100-26.ec2.internal app=blue:NoSchedule
 kubectl create -f deployment.yaml
 kubectl delete -f deployment.yaml
