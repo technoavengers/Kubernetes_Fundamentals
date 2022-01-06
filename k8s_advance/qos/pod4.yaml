@@ -16,5 +16,4 @@ spec:
         limits:
           memory: 1Gi
           cpu: "100m"
-  nodeSelector:
-    size: large
+  priorityClassName: high-priority
