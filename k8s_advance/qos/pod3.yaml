@@ -2,10 +2,17 @@
 apiVersion: v1
 kind: Pod
 metadata: 
-  name: pod1-without-limits
+  name: pod1-with-both-request-limits
   labels:
     type: frontend
 spec:
   containers:
     - name: httpd-container
       image: httpd
+      resources:
+        requests:
+          memory: 1Gi
+          cpu: "1"
+        limits:
+          memory: 2Gi
+          cpu: "2"

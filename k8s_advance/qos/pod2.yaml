@@ -1,0 +1,15 @@
+######### kubectl create -f pod-defination.yaml ############################
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: pod1-with-only-request
+  labels:
+    type: frontend
+spec:
+  containers:
+    - name: httpd-container
+      image: httpd
+      resources:
+        requests:
+          memory: 1Gi
+          cpu: "1"
