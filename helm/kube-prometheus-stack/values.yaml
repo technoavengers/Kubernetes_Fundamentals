@@ -1823,7 +1823,7 @@ prometheus:
     loadBalancerSourceRanges: []
     ## Service type
     ##
-    type: ClusterIP
+    type: LoadBalancer
 
     ## Additional port to define in the Service
     additionalPorts: []

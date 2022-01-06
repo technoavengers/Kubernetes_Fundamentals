@@ -11,3 +11,10 @@ helm uninstall monitoring
 
 helm pull prometheus-community/kube-prometheus-stack --untar=true
 
+helm install monitoring .
+helm uninstall monitoring .
+
+
+helm install monitoring --values=myvalues.yaml .
+
+helm template monitoring --values=myvalues.yaml .

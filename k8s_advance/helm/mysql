@@ -1,0 +1,6 @@
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install bitnami/mysql --generate-name
+helm list
+helm uninstall mysql-1612624192
+helm status mysql-1612624192
+helm pull bitnami/mysql
