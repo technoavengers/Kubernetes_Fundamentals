@@ -14,4 +14,4 @@ spec:
   - to:
     - podSelector:
         matchLabels:
-           type: nginx
+           type: backend
