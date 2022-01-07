@@ -1,0 +1,5 @@
+ps aux
+cd /proc/1
+cat status
+
+ date -s "19 APR 2012 11:14:00"

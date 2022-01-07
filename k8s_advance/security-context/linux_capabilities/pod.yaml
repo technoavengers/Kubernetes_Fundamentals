@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: security-context-demo-4
+spec:
+  containers:
+  - name: httpd
+    image: httpd
+    securityContext:
+      capabilities:
+        add: ["SYS_TIME"]
