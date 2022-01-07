@@ -1,6 +1,23 @@
-kubectl create namespace dev
+k create namespace dev
+k create namespace prod
 
-kubectl create namespace prod
+k create clusterrole deploy-deleter --verb=delete --resource=deployment
+
+k create clusterrolebinding deploy-deleter --clusterrole=deploy-deleter --user=nav
+
+k -n dev create rolebinding deploy-deleter --clusterrole=deploy-deleter --user=joy
+
+# test nav
+k auth can-i delete deploy --as nav # yes
+k auth can-i delete deploy --as nav -n dev # yes
+k auth can-i delete deploy --as nav -n prod # yes
+k auth can-i delete deploy --as nav -A # yes
+k auth can-i create deploy --as nav --all-namespaces # no
 
 
-Give user 
+
+# test jim
+k auth can-i delete deploy --as joy # no
+k auth can-i delete deploy --as joy -A # no
+k auth can-i delete deploy --as joy -n dev # yes
+k auth can-i delete deploy --as joy -n prod # no

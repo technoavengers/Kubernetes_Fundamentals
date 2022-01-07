@@ -13,11 +13,6 @@ Step 2: Create a CSR (Certificate SIgning Request)
 openssl req -new -key nav.key -out nav.csr
 
 
-##### Sign CSR and get certificate
-
-openssl x509 -req -in nav.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key  -CAcreateserial -out nav.crt -days 20
-
-
 ###########################################
 Step 3: Sign CSR using Kubernetes API
 
@@ -55,4 +50,12 @@ kubectl config use-context nav
 
 ######### Check Permissions #################
 kubectl auth can-i get pod -A
+
+
+
+
+##### Sign CSR and get certificate
+
+openssl x509 -req -in nav.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key  -CAcreateserial -out nav.crt -days 20
+
 
