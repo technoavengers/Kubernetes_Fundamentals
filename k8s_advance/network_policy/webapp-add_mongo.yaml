@@ -7,14 +7,14 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-       app: webapp
+      type: frontend
   policyTypes:
   - Egress
   egress:
   - to:
     - podSelector:
         matchLabels:
-          app: mongodb
+          type: backend
     ports:
     - protocol: TCP
       port: 27017
