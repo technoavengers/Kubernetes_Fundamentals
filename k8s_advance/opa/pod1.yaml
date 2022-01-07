@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mywebapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: frontend
+  template:
+    metadata:
+      name: nodeapp-pod
+      labels:
+        type: frontend
+    spec:
+      containers:
+      - name: nodeapp
+        image: navjoy220161/node-mongo:v1
+        envFrom:
+        - configMapRef:
+           name: app-configmap
+        resources: {}
+          
