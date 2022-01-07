@@ -1,0 +1,11 @@
+######### kubectl create -f pod-defination.yaml ############################
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: nginx
+  labels:
+    type: nginx
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
