@@ -1,0 +1,6 @@
+k create -f frontend.yaml
+k create -f backend.yaml
+k expose pod frontend --port=80
+k expose pod backend --port=80
+k exec -it frontend -- curl backend
+k exec -it backend -- curl frontend
