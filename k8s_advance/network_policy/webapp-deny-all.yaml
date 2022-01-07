@@ -7,6 +7,6 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-       app: webapp
+       type: frontend
   policyTypes:
   - Egress
