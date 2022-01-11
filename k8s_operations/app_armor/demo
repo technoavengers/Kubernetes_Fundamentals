@@ -1,0 +1,6 @@
+curl killer.sh -v
+aa-status
+apt-get install apparmor-utils
+aa-genprof curl
+curl killer.sh -v
+aa-status
