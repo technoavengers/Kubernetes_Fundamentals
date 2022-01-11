@@ -1,0 +1,3 @@
+[submodule "k8s_operations/k8s_operations/kube-ops-view"]
+	path = k8s_operations/k8s_operations/kube-ops-view
+	url = https://github.com/schoolofdevops/kube-ops-view
