@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: python-flask
+spec:
+  containers:
+  - name: flask-container
+    image: mypythonimage
