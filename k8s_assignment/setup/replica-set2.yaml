@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: nginx-rs
+  name: loadbalancer-rs
   labels:
     type: loabbalancer-rs
 spec:
@@ -11,7 +11,7 @@ spec:
       type: loadbalancer
   template:
     metadata:
-      name: nginx-app
+      name: loadbalancer-app
       labels:
         type: loadbalancer
     spec:
