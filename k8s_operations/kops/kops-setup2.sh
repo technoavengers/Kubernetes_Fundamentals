@@ -1,13 +1,13 @@
 ################ Create a aws S3 bucket to store cluster state #########
 aws s3api create-bucket \
-    --bucket kops-technoavengers-com-state-store \
+    --bucket kops-technoavengers-com-state-store-instructor \
     --region us-east-1
 
 aws s3api put-bucket-versioning --bucket kops-technoavengers-com-state-store  --versioning-configuration Status=Enabled
 
 ################ Set cluster name and state_store env variable #########
-export NAME=technoavengers.k8s.local
-export KOPS_STATE_STORE=s3://kops-technoavengers-com-state-store
+export NAME=technoavengers.k8s.local-instructor
+export KOPS_STATE_STORE=s3://kops-technoavengers-com-state-store-instructor
 
 ################ Create Kops Cluster Configuration files #########
 kops create cluster \

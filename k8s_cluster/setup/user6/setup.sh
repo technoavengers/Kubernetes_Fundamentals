@@ -11,7 +11,7 @@ aws s3api put-bucket-versioning --bucket kops-technoavengers-user6-com-state-sto
 export NAME=technoavengers.user6.k8s.local
 export KOPS_STATE_STORE=s3://kops-technoavengers-user6-com-state-store
 kops create cluster \
-    --zones=us-east-1a,us-east-1b,us-east-1c \
+    --zones=us-east-1a,us-east-1b \
     --api-loadbalancer-type public \
     ${NAME}
 ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa

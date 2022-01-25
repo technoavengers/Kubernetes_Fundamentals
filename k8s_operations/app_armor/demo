@@ -4,3 +4,6 @@ apt-get install apparmor-utils
 aa-genprof curl
 curl killer.sh -v
 aa-status
+cd /etc/aapparmor.d
+aa-logprof
+

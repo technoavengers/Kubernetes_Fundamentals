@@ -6,6 +6,6 @@ spec:
   type: ClusterIP
   ports:
   - targetPort: 27017
-    port: 27017
+    port: 80
   selector:
     type: backend

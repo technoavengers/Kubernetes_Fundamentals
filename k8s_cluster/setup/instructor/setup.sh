@@ -5,13 +5,13 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
 chmod +x kubectl
 sudo mv kubectl /usr/local/bin/kubectl
 aws s3api create-bucket \
-    --bucket kops-technoavengers-com-state-store \
+    --bucket kops-technoavengers-com-instructor-state-store \
     --region us-east-1
-aws s3api put-bucket-versioning --bucket kops-technoavengers-com-state-store  --versioning-configuration Status=Enabled
-export NAME=technoavengers.k8s.local
-export KOPS_STATE_STORE=s3://kops-technoavengers-com-state-store
+aws s3api put-bucket-versioning --bucket kops-technoavengers-com-instructor-state-store  --versioning-configuration Status=Enabled
+export NAME=technoavengers.instructor.k8s.local
+export KOPS_STATE_STORE=s3://kops-technoavengers-com-instructor-state-store
 kops create cluster \
-    --zones=us-east-1a,us-east-1b,us-east-1c \
+    --zones=us-east-1a,us-east-1b \
     --api-loadbalancer-type public \
     ${NAME}
 ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa

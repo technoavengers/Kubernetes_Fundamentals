@@ -1,0 +1,4 @@
+kubectl drain <node_name> --ignore-daemonsets
+kubectl uncordon <node_name>
+
+kubectl label node ip-172-20-64-77.ec2.internal size=large
