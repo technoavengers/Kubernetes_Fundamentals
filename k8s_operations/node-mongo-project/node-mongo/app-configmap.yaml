@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-configmap
+data:
+  MONGO_HOST: # Set proper dns name of mongodb-service (servicename.namespace.svc.cluster.local:ServicePort) 
+  APP_PORT: # Set it any port number let's say 3000, but make sure to use the same port in webapp-service targetPort
+  MONGO_DATABASE: # Set any name, let's say myfirstdb
+
+
+  

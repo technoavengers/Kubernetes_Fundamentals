@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+spec:
+  replicas: # Set replicas to 3
+  selector:
+    matchLabels:
+      # Add matching label
+  template:
+    metadata:
+      name: 
+      labels:
+        # Add container label
+    spec:
+      containers:
+      - name: nodejs
+        image: # Set image to navjoy220161/node-mongo:v1
+        envFrom:
+        - configMapRef:
+           name: # Set name of configmap
+          

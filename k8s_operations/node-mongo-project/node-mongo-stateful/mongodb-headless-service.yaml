@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-h
+spec:
+  ports:
+  - port: # Set port to 27017 on which MongoDB listens by default
+  selector:
+   # Add appropriate selector labels for pods
+  clusterIP: # Set it None for headless Service

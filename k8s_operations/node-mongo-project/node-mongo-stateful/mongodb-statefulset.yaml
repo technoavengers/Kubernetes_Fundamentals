@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: # Set kind as StatefulSet
+metadata:
+  name: mongo
+spec:
+  serviceName: # Add a headless service name
+  replicas: 2
+  selector:
+    matchLabels:
+      type: backend
+  template:
+    metadata:
+      name: mongodb-pod
+      labels:
+        type: backend
+    spec:
+      containers:
+      - name: mongo
+        image: mongo
+        volumeMounts:
+        - mountPath: /data/db
+          name: mongo-pvc
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-pvc
+    spec:
+      accessModes:
+        - # Set access mode to ReadWriteOnce
+      resources:
+        requests:
+          storage: # Set storage value to 1Gi

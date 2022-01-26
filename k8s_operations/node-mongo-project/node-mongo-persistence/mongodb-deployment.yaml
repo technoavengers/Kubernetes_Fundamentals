@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: backend
+  template:
+    metadata:
+      name: mongodb-pod
+      labels:
+        type: backend
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo
+# Add below section to mount persistent volume
+        volumeMounts:
+          - name: mongo-pvc
+            mountPath: # Set this mount path to /data/db where mongodb store data by default
+      volumes:
+        - name: mongo-pvc
+          persistentVolumeClaim:
+            claimName: # Add persistent claim name 
