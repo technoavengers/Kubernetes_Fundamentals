@@ -1,0 +1,58 @@
+###################### Step1: Create a namespace demo #######################
+
+kubectl create namespaces demo
+
+###################### Step2: Create a resourceQuota for namespace demo #######################
+
+Change dev-compute-quota.yaml
+
+>> make sure you change namespace to demo 
+>> Add requests.storage to 10Gi   
+>> Add requests.cpu to 1
+>> Add limits.cpu to 1
+>> Add requests.memory: 1Gi
+>> Add limits.memory: 5Gi
+
+Check out docs for more details https://kubernetes.io/docs/concepts/policy/resource-quotas/
+
+kubectl create -f dev-compute-quota.yaml
+
+###################### Step3: Describe namespace demo #######################
+
+kubectl describe namespace demo
+
+Did you noticed resourceQuota in demo??
+
+###################### Step4: Let's create a pod and request memory 1Gi #######################
+
+kubectl create -f pod1.yaml
+
+###################### Step5: Check namespace resourceQuota again #######################
+
+kubectl describe namespace demo
+
+Did you noticed resourceQuota consumption??
+
+###################### Step6: Let's create a pod and request 2Gi memory #######################
+
+kubectl create -f pod2.yaml
+
+Did you got the error because of resourceQuota??
+
+
+###################### Step7: Create another resourceQuota for namespace demo for resource counts #######################
+
+kubectl create -f dev-object-count.yaml
+
+
+###################### Step8: Check namespace resourceQuota again #######################
+
+kubectl describe namespace demo
+
+Did you noticed resourceQuota is now updated??
+
+###################### Step9: Let's create a pod #######################
+
+kubectl create -f pod3.yaml
+
+Did you got the error because of resourceQuota?? Great
