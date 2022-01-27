@@ -28,11 +28,12 @@ kubectl describe pod pod1 -n dev
 >> Wait, did you just saw Burstable? But in last demo, it was BestEffort
 >> What went wrong?
 >> Nothing
->> Just check resources section, did you see anything?
+>> It was just the limit range that added resources
+
 
 ############ Step6: Create a Pod in dev namespaces with just limits ########################
 
-kubectl create -f pod1.yaml
+kubectl create -f pod2.yaml
 
 ############ Step7: Describe Pod and check resources ########################
 
@@ -43,7 +44,7 @@ kubectl describe pod pod-with-limit -n dev
 
 ############ Step7: Create a Pod in dev namespaces with just request ########################
 
-kubectl create -f pod1.yaml
+kubectl create -f pod3.yaml
 
 ############ Step7: Describe Pod and check resources ########################
 
