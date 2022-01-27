@@ -1,16 +1,77 @@
-kubectl drain ip-172-20-97-209.ec2.internal  --ignore-daemonsets
-kubectl uncordon ip-172-20-97-209.ec2.internal 
+######### Step 1: Taint your one of your worker machine ##########
+kubectl get node (use the ip address of one of your worker machine in below command)
 
-kubectl taint node ip-172-20-100-26.ec2.internal app=blue:NoSchedule
+kubectl taint node <ip_your_worker> app=blue:NoSchedule
+
+######### Step 2: Now drain second worker node ##########
+>> Draining brings node out of the cluster & make it unavailable for scheduling
+>> We are doing this step just to understand the concept of taint
+
+kubectl drain <ip_your_worker>  --ignore-daemonsets
+
+
+######### Step 3: Create a deployment ##########
 kubectl create -f deployment.yaml
+
+######### Step 4: Check out the status of pods ##########
+kubectl get pod
+
+>> Did you noticed pods are in pending status
+
+######### Step 5: Check Pods Events ##########
+kubectl describe pod <podname>
+
+>> Check out the event section, did you noticed that it is saying something regarding taints?
+
+
+######### Step 6: Add toleration to the deployment ##########
+kubectl apply -f deployment_with_toleration1.yaml
+
+######### Step 7: Check out the status of pods ##########
+kubectl get pod -o wide
+
+>> Did you noticed they are in running status
+>> Also, notice that they are scheduled on the node on which taint was applied
+
+
+######### Step 8: Let's untaint the node ##########
+
+kubectl taint node <ip_your_worker> app=blue:NoSchedule-
+
+######### Step 9: Delete the deployment ##########
+
+kubectl delete -f deployment_with_toleration1.yaml
+
+######### Step 10: Run deployment again without toleration ##########
+
 kubectl delete -f deployment.yaml
 
-kubectl create -f deployment_with_toleration.yaml
-kubectl delete -f deployment_with_toleration.yaml
+######### Step 11: Check out the status of pods ##########
+kubectl get pod
 
-kubectl taint --all node app=blue:NoSchedule-
+>> It should be in running status
+
+######### Step 12: Let's taint same node again with NoExecute polciy ##########
+
+kubectl taint node <ip_your_worker> app=blue:NoExecute
+
+######### Step 13: Check out the status of pods ##########
+kubectl get pod
+
+>> Did you noticed that pod status has went to pending now
 
 
-kubectl create -f deployment.yaml
-kubectl taint node ip-172-20-100-26.ec2.internal  app=blue:NoExecute
-kubectl create -f deployment_with_toleration.yaml
+######### Step 13: Change deployment to add matching tolerations ##########
+kubectl apply -f deployment_with_toleration2.yaml
+
+######### Step 13: Check out the status of pods ##########
+kubectl get pod
+
+>> Did you noticed that pod status is running now
+
+
+######### Step 14: Bring back cluster to normal ##########
+
+kubectl uncordon <ip_your_worker_that_was_drained>
+kubectl taint node <ip_your_worker> app=blue:NoExecute-
+kubectl delete -f deployment.yaml

@@ -1,23 +1,42 @@
+################### Step 1: Create two users #######################
+
+User CSR process to create two users
+
+################### Step 2: Create two namespaces #######################
+
 k create namespace dev
 k create namespace prod
 
+################# Step 3: Create a clusterrole to delete deployment ##########
+
 k create clusterrole deploy-deleter --verb=delete --resource=deployment
+
+######### Step 4: Create a clusterrolebinding for above role and bind your first user ##########
 
 k create clusterrolebinding deploy-deleter --clusterrole=deploy-deleter --user=nav
 
+
+######### Step 5: Create a rolebinding for above role and bind your second user in namespace dev ##########
+
 k -n dev create rolebinding deploy-deleter --clusterrole=deploy-deleter --user=joy
 
-# test nav
+######### Step 6: Test first user ##########
+
 k auth can-i delete deploy --as nav # yes
 k auth can-i delete deploy --as nav -n dev # yes
 k auth can-i delete deploy --as nav -n prod # yes
 k auth can-i delete deploy --as nav -A # yes
 k auth can-i create deploy --as nav --all-namespaces # no
 
+Did you noticed, since your first user has been binded with clusterrolebinding
+It has Permissions in all namespaces
 
+######### Step 7: Test Second user ##########
 
-# test jim
 k auth can-i delete deploy --as joy # no
 k auth can-i delete deploy --as joy -A # no
 k auth can-i delete deploy --as joy -n dev # yes
 k auth can-i delete deploy --as joy -n prod # no
+
+Did you noticed, since your Second user has been binded with rolebinding for dev namespace
+It has Permissions only in namespace dev

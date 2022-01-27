@@ -1,3 +1,58 @@
-kubectl create -n default role pod-manager --verb=get --verb=list --verb=delete --resource=pods --dry-run=client -oyaml > role.yaml
-kubectl create -n default rolebinding pod-manager --role=pod-manager --user=nav --dry-run=client -oyaml > rolebinding.yaml
+########## Step1: Make sure you are admin context ########################
+kubectl config get-contexts
+kubectl config use-context ???
+
+########## Step2: Create a pod in default  and sample namespace ########################
+kubectl run httpd-default --image httpd
+
+kubectl create namespace sample
+kubectl run httpd-default --image httpd -n sample
+
+########## Step3: Create a role using roles.yaml ########################
+
+kubectl create -f roles.yaml
+
+Did you noticed that this role is for  providing get,list,delete,describe for pods in default namespace
+
+########## Step4: Create a rolebinding for above role using rolebinding.yaml ########################
+
+>> Check out the file and change the file to add your user
+
+kubectl create -f rolebinding.yaml
+
+########## Step5: Set context to use above user who has been given role ########################
+
+kubectl config get-contexts
+kubectl config use-context nav
+
+########## Step6 : Test User ########################
+kubectl get pod
+
+>>>>  Did you noticed your user has now access to view pods
+
+kubectl delete pod httpd-default
+
+>>>>  Did you noticed your user has now access to view pods
+
+kubectl get pod -n sample
+
+>>>>  Did you noticed your user has dont have access to view pod in namespace default
+
+########## Step8: Make sure you are back in admin context ########################
+kubectl config get-contexts
+kubectl config use-context ???
+
+########## Step9 : Create Roles and rolebinding using commands ########################
+kubectl create -n default role secret-manager --verb=get --verb=list  --resource=secret
+kubectl create -n default rolebinding secret-manager --role=secret-manager --user=nav
+
+
+
+########## Step10: Test User ########################
+k auth can-i get secret --as nav
+
+k auth can-i delete secret --as nav
+
+
+
 

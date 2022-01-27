@@ -1,6 +1,76 @@
-kubectl label node ip-172-20-100-26.ec2.internal  size=large
+
+############ Label one of your worker machine ####################
+
+kubectl label node <ip_worker_machine>  size=large
+
+############ Run deployment without any nodeselector ####################
+
+kubectl create -f deployment.yaml
+
+
+############ Check out pod ####################
+
+kubectl get pod -o wide
+
+>> Did you noticed replicas are placed on seperate worker machines
+
+############ Delete above deployment ####################
+
+kubectl delete -f deployment.yaml
+
+############ Run another deployment with added nodeselector ####################
+
+kubectl create -f deployment_node_selector.yaml
+
+############ Check out pod ####################
+
+kubectl get pod -o wide
+
+>> Did you noticed replicas are placed on worker which you have labelled?
+
+
+############ Run deployment with a nodeselector with matching label ####################
+
+kubectl create -f deployment_node_selector.yaml
+
+############ Delete above deployment ####################
+
+kubectl delete -f deployment_node_selector.yaml
+
+
+############ UnLabel your worker machine ####################
 
 kubectl label --all node size-
 
-############ Add a taint ####################
-kubectl taint node ip-172-20-100-26.ec2.internal app=blue:NoExecute
+############ Run deployment with a nodeselector with matching label ####################
+
+kubectl create -f deployment_node_selector.yaml
+
+############ Check out pod ####################
+
+kubectl get pod -o wide
+
+>> Did you noticed replicas are in pending status because none of the node has matching label
+
+
+############ Delete above deployment ####################
+
+kubectl delete -f deployment_node_selector.yaml
+
+############ Label your node again ####################
+
+kubectl label node <ip_worker_machine>  size=large
+
+############ Run deployment with a nodeaffinity with  label and requiredDuringSchedulingIgnoredDuringExecution policy ####################
+
+kubectl create -f deployment_node_affinity.yaml
+
+############ Check out pod again####################
+
+kubectl get pod -o wide
+
+>> All pods should get started on the machine with matching label
+
+############ Clean up your cluster ####################
+
+kubectl delete -f .
