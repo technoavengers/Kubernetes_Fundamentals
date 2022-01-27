@@ -1,4 +1,36 @@
-kubectl drain <node_name> --ignore-daemonsets
-kubectl uncordon <node_name>
+############ Step1: Delete default LimitRange ########################
 
-kubectl label node ip-172-20-64-77.ec2.internal size=large
+kubectl delete LimitRange limits 
+
+############ Step2: Create a Pod with no requests & limits defined ########################
+
+kubectl create -f pod1.yaml
+
+kubectl describe pod pod1-no-limits-requests
+
+>>>> Check for QOS, Did you noticed it is BestEffort
+
+############ Step3: Create a Pod with only requests & no limits ########################
+
+kubectl create -f pod2.yaml
+
+kubectl describe pod pod1-with-only-request
+
+>>>> Check for QOS, Did you noticed it is Burstable
+
+############ Step3: Create a Pod with both requests & limits but different values ########################
+
+kubectl create -f pod3.yaml
+
+kubectl describe pod pod1-with-both-request-limits
+
+>>>> Check for QOS, Did you noticed it is still Burstable
+
+############ Step4: Create a Pod with both requests & limits and matching ########################
+
+kubectl create -f pod5.yaml
+
+kubectl describe pod pod1-with-both-request-limits-2
+
+>>>> Check for QOS, Did you noticed it is still Guaranted
+
