@@ -17,7 +17,7 @@ kubectl get pod -o wide
 
 ########################### Step5: Try to drain the node that has replicas  ##################################
 
-kubectl drain node <ip-address> --ignore-daemonsets
+kubectl drain node <ip-address> --force --ignore-daemonsets
 
 >>> Did you just got the PodDisruptionBudget message for mywebapp pods??
 Great 
