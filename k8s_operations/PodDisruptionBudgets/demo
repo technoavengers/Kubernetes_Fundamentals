@@ -1,0 +1,24 @@
+########################### Step1: Clean up  ##################################
+kubectl delete --all deployment
+kubectl delete --all pod
+
+########################### Step2: Create a deployment  ##################################
+
+kubectl create -f mywebapp.yaml
+
+########################### Step3: Set up PodDisruption Budget for this deployment ##################################
+
+kubectl create -f pdp.yaml
+
+########################### Step4: Check out node on which pods are running  ##################################
+
+kubectl get pod -o wide
+
+
+########################### Step5: Try to drain the node that has replicas  ##################################
+
+kubectl drain node <ip-address> --ignore-daemonsets
+
+>>> Did you just got the PodDisruptionBudget message for mywebapp pods??
+Great 
+

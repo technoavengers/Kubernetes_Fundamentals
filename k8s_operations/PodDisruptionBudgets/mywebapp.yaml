@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: httpd-container
 spec:
-  replicas: 3
+  replicas: 6
   selector:
     matchLabels:
       name: frontend
