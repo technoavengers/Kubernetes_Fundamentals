@@ -1,0 +1,57 @@
+############ Step1: Create a namespace dev ########################
+
+kubectl create namespace dev
+
+############ Step2: Create a LimitRange for namespace dev ########################
+
+>> Add cpu: 100m in the request section
+
+kubectl create -f LimitRange.yaml
+
+kubectl get LimitRange -n dev
+
+
+############ Step3: Describe the namespace ########################
+
+kubectl describe namespace dev
+
+-- Did you noticed the limit range??
+
+############ Step4: Create a Pod in dev namespaces with no request and limits ########################
+
+kubectl create -f pod1.yaml
+
+############ Step5: Describe Pod and check QOS ########################
+
+kubectl describe pod pod1 -n dev
+
+>> Wait, did you just saw Burstable? But in last demo, it was BestEffort
+>> What went wrong?
+>> Nothing
+>> Just check resources section, did you see anything?
+
+############ Step6: Create a Pod in dev namespaces with just limits ########################
+
+kubectl create -f pod1.yaml
+
+############ Step7: Describe Pod and check resources ########################
+
+kubectl describe pod pod-with-limit -n dev
+
+>> Is it getting any default value from limit range??
+
+
+############ Step7: Create a Pod in dev namespaces with just request ########################
+
+kubectl create -f pod1.yaml
+
+############ Step7: Describe Pod and check resources ########################
+
+kubectl describe pod pod-with-request -n dev
+
+>> Is it getting any default value from limit range??
+
+
+
+
+

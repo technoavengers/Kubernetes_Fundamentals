@@ -34,3 +34,8 @@ kubectl describe pod pod1-with-both-request-limits-2
 
 >>>> Check for QOS, Did you noticed it is still Guaranted
 
+##################################################################################################
+
+Did you noticed that we deleted some LimitRange in the first step. Why so?
+We will understand that in next demo
+
