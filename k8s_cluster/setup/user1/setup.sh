@@ -13,6 +13,7 @@ export KOPS_STATE_STORE=s3://kops-technoavengers-user1-com-state-store
 kops create cluster \
     --zones=us-east-1a,us-east-1b \
     --api-loadbalancer-type public \
+    --networking calico \
     ${NAME}
 ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa
 kops create secret --name ${NAME} sshpublickey admin -i ~/.ssh/id_rsa.pub
