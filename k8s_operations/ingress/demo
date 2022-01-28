@@ -11,4 +11,59 @@ kubectl get svc -n ingress-nginx
 
 ############ Step3: Make all of services of your application as clusterIP ########################
 
-kubectl get svc
+>> Go to k8s_operation/Vehicle_Management
+>> vi service.yaml
+>> change type of all service to clusterIP (Actually there is only one with type:LoadBalancer, just change it to ClusterIP)
+>> kubectl apply -f service.yaml
+
+############ Step4: Create Routing policy using Ingress ########################
+
+>> Go to k8s_operation/ingress
+>> Check webapp-ingress.yaml
+>> Did you noticed , we have defined some host name to route our traffic in webapp-ingress.yaml
+>> Change host name 
+    vehicle.technoavengers.click ---> <your_user_id>.vehicle.technoavengers.click
+    queue.vehicle.technoavengers.click --> <your_user_id>.queue.vehicle.technoavengers.click
+
+    Example: If you are user1
+    user1.vehicle.technoavengers.click
+    user1.queue.vehicle.technoavengers.click
+
+>> Now create Ingress
+    kubectl create -f webapp-ingress.yaml
+
+>> Wait a second, but we have defined host but where to configure them?
+
+
+############ Step5: Create Route53 Records ########################
+>> Go to aws console
+>> Search for route53
+>> Did you noticed, it says 1 Hosted zone
+>> I actually purchased a domain name "technoavengers.click" to give you a real feeling
+>> Click on Hosted zone
+>> On next page, click on technoavengers.click
+
+############ Step6: Create A Record for 1st path <your_user_id>.vehicle.technoavengers.click ########################
+>> Click on Create Record
+>> Enter "<user_id>.vehicle" in Record name
+>> Click on Alias
+>> From dropdown, choose network LoadBalancer
+>> Select us-east-1 if your cluster is in us-east-1
+>> Enter External_IP of Ingress LoadBalancer (kubectl get svc -n ingress-nginx)
+>> Click on Create Record
+
+############ Step6: Create A Record for 2st path <your_user_id>.queue.vehicle.technoavengers.click ########################
+>> Click on Create Record
+>> Enter "<your_user_id>.queue.vehicle" in Record name
+>> Click on Alias
+>> From dropdown, choose network LoadBalancer
+>> Select us-east-1 if your cluster is in us-east-1
+>> Enter External_IP of Ingress LoadBalancer (kubectl get svc -n ingress-nginx)
+>> Click on Create Record
+
+################ Open your browser ####################
+Check whether your website is working?
+
+user1.vehicle.technoavengers.click
+user1.queue.vehicle.technoavengers.click
+
