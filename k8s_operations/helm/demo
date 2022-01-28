@@ -28,7 +28,7 @@ kubectl get all
 kubectl get svc
 >> I want to access monitoring-grafana service to see grafana dashbaorad 
 >> But if you noticed, it is of type of ClusterIP
->> Let's change it using edit command 
+>> Let's change it using helm upgrade 
 
 ############################ Step7: Using Helm Upgrade #####################
 
