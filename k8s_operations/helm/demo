@@ -32,7 +32,6 @@ kubectl get svc
 
 ############################ Step7: Using Helm Upgrade #####################
 
-helm show values prometheus-community/kube-prometheus-stack
 helm upgrade  monitoring prometheus-community/kube-prometheus-stack --set grafana.service.type=LoadBalancer
 
 ############################ Step8: Let's access the grafana LoadBalancer #####################
@@ -60,7 +59,7 @@ helm pull prometheus-community/kube-prometheus-stack --untar=true
 ############################ Step12: Add Custom Configuration #####################
 
 >> Go Inside kube-prometheus-stack folder
->> Add myvalues.yaml
+>> Add a file named myvalues.yaml
 >> Add below text
 
 grafana:
@@ -106,10 +105,10 @@ kubectl get svc (Open the External_IP of monitoring-grafana in a browser)
 
  helm rollback monitoring
 
- ############################ Step19: Search Chart #####################
+############################ Step19: Check Helm Chart history again #####################
 
- helm search monitoring grafana
+ helm history monitoring
 
 ############################ Step20: Static yaml #####################
 
-helm template monitoring --values=myvalues.yaml .
+helm template monitoring --values=myvalues.yaml . > monitoring-stack.yaml
