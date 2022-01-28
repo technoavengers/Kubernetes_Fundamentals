@@ -1,0 +1,98 @@
+Please note, for this demo, your fleet management system should be up and running
+
+######################### Step1: Apply ELK Stack in your cluster #######################################
+kubectl create -f .
+
+>> It will create elasticdb as (StatefulSet), fluentd as (daemonsets) and Kibana as (Deployment)
+>> It will also expose all above componenets with services
+>> All resources is created in kube-system namespace
+
+######################### Step2: Check for Kibana svc in kube-system namespace #########################
+
+kubectl get svc -n kube-system
+
+>> Check the External IP of kibana-logging services
+
+
+######################### Step3: Open Kibana Dashboard #########################
+>> Open browser and enter <External_IP of LoadBalancer>:5601
+>> Remember to add port 5601
+
+######################### Step4: Setup Index Pattern #########################
+>> Click on "Setup Index Pattern" on right top corner of Dashboard 
+
+
+######################### Step5: Create index pattern #########################
+>> Enter logstash* in index-pattern textbox
+>> You will get  Success!  Your index pattern matches 1 index.
+>> Click on Next Step
+>> Click on Time Filter field name dropdown and select @timestamp
+>> Click on "Create index pattern" button 
+
+######################### Step6: Check logs #########################
+>> Click on "Discover" in left hand side navigation
+>> Dashboard has all logs from pods from all namespaces of your cluster
+
+######################### Step7: Add a filter #########################
+>> kubernetes.namespaces.name: default
+>> Now Dashboard has logs only from default namespace
+
+######################### Step8: Setup a timeframe #########################
+>> click on Auto Refresh on top corner of screen to auto refresh logs after every 5 seconds
+>> Also click on Last 15 minutes and click on Relative
+>> change timeframe from 2 minutes to now
+
+######################### Step9: Simulate a application failure & check logs ######################
+>>> Go to k8s_operation/Vehicle_Management
+>>> open workload.yaml
+>>> For Deployment named "queue", change the replicas to 0
+>> kubectl apply -f workload.yaml
+
+
+######################### Step10: Check logs on Kibana Dashboard ######################
+>> Did you noticed, suddenly there is a surge in logs "Queue unavailable"
+>> Logs are increasing rapidly
+
+
+######################### Step11: Save this search ######################
+>>> Enter Queue unavailable in top Search box and click on Save
+>>> Give it some name "queue_unavailable" and Save it
+
+######################### Step12: Let's Visualize ######################
+>>> Click on Visualize in left hand navigation
+>>> click on Create a Visualization
+>>> click on Line
+>>> Select queue_unavailable under Saved Search
+>>> Under Bucket, click on X-axis
+>>> Under Aggregation dropdown, select Date Histogram
+>>> Select on Apply changes (Its like blue colored play button)
+>>> Did you noticed that Histogram for your queue unavailable issue
+>>> Save this Visualization, Click on Save on top of screen
+>>> Give it a name , "queue_histogram" and save it
+
+######################### Step13: Let's Create second Visualization for same search ######################
+>>> Click on Visualize in left hand navigation
+>>> click on + button to add a new Visualization
+>>> Click on Guage
+>>> Select queue_unavailable under Saved Search
+>>> Did you noticed we got red alert guage indicating some serious problem
+>>> Select on Apply changes (Its like blue colored play button)
+>>> Save this Visualization, Click on Save on top of screen
+>>> Give it a name , "queue_guage" and save it
+
+######################### Step14: Create a Dashboard ######################
+>>> Click on Dashboard in left hand navigation 
+>>> click on +Create a Dashboard button to add a new Visualization
+>>> Click on Add to add saved Visualization
+>>> Click on both queue_guage and queue_histogram to see results on same Dashboard
+
+Great work, have these dashboard playing on some TV screen in your company..very cool :)
+
+######################### Step15: Bring cluster back to normal ######################
+>>> Go to k8s_operation/Vehicle_Management
+>>> open workload.yaml
+>>> For Deployment named "queue", change the replicas to 1
+>> kubectl apply -f workload.yaml
+
+######################### Step16: Look at Kibana ######################
+Sit down peacefully for 2 mins and watch dashboard for count getting dropped

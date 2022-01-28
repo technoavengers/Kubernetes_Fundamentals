@@ -1,0 +1,14 @@
+############ Step1: Create Ingress Controller in your cluster ########################
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/cloud/deploy.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.0/deploy/static/provider/aws/deploy.yaml
+
+>> Above command will create a nginx controller in your cluster that will be your single entrypoint
+
+############ Step2: Check for LoadBalancer in namespace ingress-nginx ########################
+
+kubectl get svc -n ingress-nginx
+
+############ Step3: Make all of services of your application as clusterIP ########################
+
+kubectl get svc
