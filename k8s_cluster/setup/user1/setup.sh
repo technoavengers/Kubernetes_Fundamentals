@@ -1,3 +1,8 @@
+##### Create Cloud9
+##### Create a role with below access policies
+##### Attach iam role to your cloud9 EC2
+##### In Cloud9 --Click on Cloud9 on left top bar --> preference --> AWS Setting --> Turn off Credentials
+
 
 ################ Before starting this setup, your bootstrapping instance must have following policies #################
 
@@ -57,3 +62,6 @@ kops create secret --name ${NAME} sshpublickey admin -i ~/.ssh/id_rsa.pub
 kops update cluster --name ${NAME} --yes --admin=87600h
 
 ############## Kubectl Config View ########################
+
+############ Remember to add ELASTICLOADBALANCINGFULL policies in your master role #############
+############ Go to IAM --> Click on Role --> Search for master --> click on your master ---> Attach policy --> Search ELASTICLOAD --> ADD
