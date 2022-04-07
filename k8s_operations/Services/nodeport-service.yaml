@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: mywebapp-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     type: frontend-http
   ports:
