@@ -1,0 +1,114 @@
+############################ Step1: Install Helm #####################
+
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
+chmod 700 get_helm.sh
+./get_helm.sh
+
+
+############################ Step2: Check Version #####################
+
+helm Version
+
+############################ Step3: Add Repo #####################
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+############################ Step4: Install Chart  #####################
+
+helm install monitoring prometheus-community/kube-prometheus-stack
+
+############################ Step5: Check out what all things got created  #####################
+kubectl get all
+
+>> Did you notice pods,deployment and svc starting with the name monitoring?
+
+
+############################ Step6: Check out services explicity #####################
+kubectl get svc
+>> I want to access monitoring-grafana service to see grafana dashbaorad 
+>> But if you noticed, it is of type of ClusterIP
+>> Let's change it using helm upgrade 
+
+############################ Step7: Using Helm Upgrade #####################
+
+helm upgrade  monitoring prometheus-community/kube-prometheus-stack --set grafana.service.type=LoadBalancer
+
+############################ Step8: Let's access the grafana LoadBalancer #####################
+
+kubectl get svc
+
+>> Check external ip of monitoring-grafana and open it in browser
+>> Enter username: admin and password: prom-operator
+
+
+############################ Step9: Welcome to Grafana Dashboard #####################
+
+>> Click on General/Home on left top corner to get list of pre-defined monitoring 
+>> Scroll down and click on Node Exporter/Use Method/Cluster
+>> This will show Memory/CPU/Disk/Network utilization of all machines in a cluster
+
+############################ Step10: Uninstall Helm Chart #####################
+
+helm uninstall monitoring
+
+
+############################ Step11: Pull Helm Chart #####################
+helm pull prometheus-community/kube-prometheus-stack --untar=true
+
+############################ Step12: Add Custom Configuration #####################
+
+>> Go Inside kube-prometheus-stack folder
+>> Add a file named myvalues.yaml
+>> Add below text
+
+grafana:
+   service:
+     type: LoadBalancer
+
+############################ Step13: Install Helm chart with Custom Configuration file #####################
+
+helm install monitoring --values=myvalues.yaml .
+
+############################ Step14: Checkout grafana svc #####################
+
+kubectl get svc
+
+Did you noticed that type of monitoring-grafana is LoadBalancer
+
+############################ Step15: Upgrade Helm chart #####################
+
+>> Open myvalues.yaml
+>> update the file to below Configuration
+
+grafana:
+   adminPassword: prom-new
+   service:
+     type: LoadBalancer
+
+>> upgrade the chart
+
+helm upgrade  monitoring --values=myvalues.yaml .
+
+
+############################ Step16: Access grafana dashboard #####################
+
+kubectl get svc (Open the External_IP of monitoring-grafana in a browser)
+>> What password we will use this time??
+>> Yes, prom-new that we added in our custom Configuration
+
+
+############################ Step17: Check Helm Chart history #####################
+ helm history monitoring
+
+############################ Step18: Rollback changes #####################
+
+ helm rollback monitoring
+
+############################ Step19: Check Helm Chart history again #####################
+
+ helm history monitoring
+
+############################ Step20: Static yaml #####################
+
+helm template monitoring --values=myvalues.yaml . > monitoring-stack.yaml
