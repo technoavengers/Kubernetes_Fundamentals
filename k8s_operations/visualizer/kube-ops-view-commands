@@ -1,5 +1,0 @@
-git clone  https://github.com/schoolofdevops/kube-ops-view
-kubectl apply -f kube-ops-view/deploy/
-
-Open the security group of nodes to 32000 
-Add /#scale=2.0 in url
