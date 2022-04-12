@@ -1,0 +1,33 @@
+############ Step1: Go to Vehicle_Management ########################
+
+>> cd k8s_operation/Vehicle_Management
+
+############ Step2: Make all of services of your application as NodePort ########################
+
+>> vi service.yaml
+>> change type of all service to clusterIP (Actually there is only one with type:LoadBalancer, just change it to NodePort)
+
+
+############ Step3: Create all resources ########################
+
+>> kubectl create -f .
+
+############ Step4: Go to ingress Folder and create ingress ########################
+
+>> cd k8s_operation/ingress
+>> kubectl apply -f gke-webapp-ingress.yaml
+
+############ Step5: Go to GKE Cluster and click on "Services And Ingress "########################
+
+Under Services, you find the ingress object
+
+Please note, it will take around 2-3 minutes for this ingress to starting
+
+
+############ Step6: Check Endpoint ########################
+
+When Ingress status is Ok, click on frontends and try different routing options as defined in ingress
+
+<frontend_ip>
+<frontend_ip>/webapp
+<frontend_ip>/queue
