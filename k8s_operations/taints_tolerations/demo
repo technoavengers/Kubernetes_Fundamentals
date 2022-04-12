@@ -44,7 +44,7 @@ kubectl delete -f deployment_with_toleration1.yaml
 
 ######### Step 10: Run deployment again without toleration ##########
 
-kubectl delete -f deployment.yaml
+kubectl create -f deployment.yaml
 
 ######### Step 11: Check out the status of pods ##########
 kubectl get pod
