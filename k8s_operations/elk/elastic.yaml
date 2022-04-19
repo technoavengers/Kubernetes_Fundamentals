@@ -247,7 +247,6 @@ spec:
   - metadata:
       name: elasticsearch-logging
     spec:
-      storageClassName: cloud-ssd
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
