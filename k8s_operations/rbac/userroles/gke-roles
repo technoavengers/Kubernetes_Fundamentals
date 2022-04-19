@@ -1,0 +1,34 @@
+###### Step1 ##############
+
+Go to your IAM services, Click on ADD, provide a gmail address in principal and under roles , select Basic -> Viewer
+
+###### Step2 ##############
+
+Open the Google cloud with new email address you added, open cloud shell and copy paste the connection string of Kubernetes cluster
+
+##### Step3 ##############
+
+Check out whether you are able to view pod
+kubectl get pod
+Does it run???
+
+###### Step4 ##############
+Now try to create a pod
+
+kubectl run http-pod --image=httpd
+
+Did you got forbidden message?
+
+###### Step5 ##############
+
+Let's go back to orginal user and create a role and rolebinding to give new user the permission to create pod
+
+Checkout roles.yaml and rolebinding.yaml and add your user details in them
+Finally create roles and rolebinding
+
+kubectl create -f roles.yaml
+kubectl create -f rolebinding.yaml
+
+##### Step6 ##############
+Now go and check whether new user got the access to create pod??
+
