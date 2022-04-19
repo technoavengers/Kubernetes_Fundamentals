@@ -85,12 +85,6 @@ spec:
         env:
         - name: FLUENTD_ARGS
           value: --no-supervisor -q
-        resources:
-          limits:
-            memory: 500Mi
-          requests:
-            cpu: 100m
-            memory: 200Mi
         volumeMounts:
         - name: varlog
           mountPath: /var/log
@@ -197,7 +191,7 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 spec:
   serviceName: elasticsearch-logging
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       k8s-app: elasticsearch-logging
@@ -213,12 +207,6 @@ spec:
       containers:
       - image: k8s.gcr.io/elasticsearch:v6.2.5
         name: elasticsearch-logging
-        resources:
-          # need more cpu upon initialization, therefore burstable class
-          limits:
-            cpu: 1000m
-          requests:
-            cpu: 100m
         ports:
         - containerPort: 9200
           name: db
@@ -250,7 +238,7 @@ spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
-          storage: 31Gi
+          storage: 10Gi
 ---
 
 #
@@ -281,12 +269,6 @@ spec:
       containers:
       - name: kibana-logging
         image: docker.elastic.co/kibana/kibana-oss:6.2.4
-        resources:
-          # need more cpu upon initialization, therefore burstable class
-          limits:
-            cpu: 1000m
-          requests:
-            cpu: 100m
         env:
           - name: ELASTICSEARCH_URL
             value: http://elasticsearch-logging:9200
