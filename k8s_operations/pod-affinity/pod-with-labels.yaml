@@ -8,7 +8,7 @@ spec:
   containers:
     - name: httpd
       image: httpd
-      affinity:
+  affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
