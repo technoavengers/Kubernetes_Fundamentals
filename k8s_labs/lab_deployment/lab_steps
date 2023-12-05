@@ -1,0 +1,47 @@
+# Clean up the cluster before starting
+
+kubectl delete --all pod
+kubectl delete --all rs
+kubectl delete --all deployment
+
+# Create a deployment using yaml file
+
+kubectl create -f deployment-defination.yaml
+
+# Check for Deployment, Replicaset, Pods
+
+kubectl get all
+
+# Update the image in deployment-defination.yaml file 
+
+containers:
+        - name: httpd
+          image: httpd:2.4
+
+
+# Apply the changes
+
+kubectl apply -f deployment-defination.yaml
+
+# Check for Deployment, Replicaset and Pod
+
+kubectl get all
+(Did you notice 2 replicaset and Pods are now created from new replicaset)
+
+# Check out Revision History
+
+kubectl rollout history deployment mywebapp
+
+# Rollback to revision 1
+
+kubectl rollout undo deployment mywebapp --to-revision=1
+
+# Check for Deployment, Replicaset and Pod again
+
+kubectl get all
+(Did you notice that pods are now created from the first replicaset representing revision 1)
+
+
+# Delete deployment
+
+kubectl delete -f deployment-defination.yaml

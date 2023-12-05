@@ -1,0 +1,39 @@
+# Clean up your cluster
+
+kubectl delete --all pod
+kubectl delete --all rs
+kubectl delete --all deploy
+
+# Create a configmap using yaml file
+
+kubectl create -f configmap-defination.yaml
+
+# Check for configmap
+
+kubectl get cm
+
+# Describe configmap
+
+kubectl describe cm app-config-new
+
+# Create a pod in which that configmap is used
+
+kubectl create -f pod-defination.yaml
+
+# Check for pod
+
+kubectl get pod
+
+# Attach to the pod
+
+kubectl exec -it pod <pod-name> /bin/bash
+
+# When attached, run the env command and check whether you can see the enviroment variables that you
+# have defined in your configmap
+
+env
+
+# Exit the Pod
+
+exit
+

@@ -1,0 +1,30 @@
+# Clean up your cluster
+
+kubectl delete --all pod
+kubectl delete --all rs
+kubectl delete --all deploy
+
+
+# Create replicaset using yaml file
+
+kubectl create -f replicaset.yaml
+
+# Expose services on replicaset
+
+kubectl create -f nodeport-service.yaml
+
+# Check for service
+
+kubectl get svc
+
+
+# Open the browser and check for below URL
+192.168.49.2:30000
+
+
+
+
+
+
+
+

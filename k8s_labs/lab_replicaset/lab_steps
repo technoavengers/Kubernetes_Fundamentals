@@ -1,0 +1,43 @@
+# Delete all existing pods
+
+kubectl delete --all pod
+
+# Create Replicaset using yaml file
+
+kubectl create -f replica-set.yaml
+
+# Check for replicaser
+
+kubectl get rs
+
+# Check for Pods
+
+kubectl get pod
+
+# Delete one Repicaset pod and check whether new pod comes up automatically
+
+kubectl delete pod <pod_name>
+
+# Scale up replicaset 
+
+kubectl scale --replicas=6 -f replica-set.yaml
+
+# Check Pods again
+
+kubectl get pod
+
+# Scale up replicaset
+
+kubectl scale --replicas=2 -f replica-set.yaml
+
+# Check Pods again
+
+kubectl get pod
+
+# Describe Replica set
+
+kubectl describe rs mywebapp-replicas
+
+# Delete Replic set
+
+kubectl delete rs mywebapp-replicas

@@ -1,0 +1,33 @@
+# Clean up your cluster
+
+kubectl delete --all pod
+kubectl delete --all rs
+kubectl delete --all deploy
+
+# Check for all namespace that exist
+
+kubectl get namespaces
+
+# Check for Pod in the namespace kube-system
+
+kubectl get pod -n kube-system
+
+# Create a new namespace dev
+
+kubectl create namespace dev
+
+# Create a pod in the new namespace dev
+
+kubectl run http-pod --image httpd -n dev
+
+# Check for pod running in dev namespace
+
+kubectl get pod -n dev
+
+# Check for Pods running in all the namespaces
+
+kubectl get pod --all-namespaces
+
+# Check for all resources in all namespaces
+
+kubectl get all --all-namespaces

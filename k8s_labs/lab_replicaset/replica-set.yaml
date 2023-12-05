@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: mywebapp-replicas
+  labels:
+    type: frontend-rs
+spec:
+  replicas: 5
+  selector: 
+    matchLabels:
+      type: frontend
+  template:
+    metadata:
+      name: myweb-app
+      labels:
+        type: frontend
+    spec:
+      containers:
+        - name: httpd-container
+          image: httpd

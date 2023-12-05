@@ -1,0 +1,52 @@
+# Check for pods
+
+kubectl get pod
+
+# Create new pod with name "nginx-pod" and image "nginx"
+
+kubectl run nginx-pod --image=nginx
+
+# Check for pods again
+
+kubectl get pod
+
+# Check Pod Logs
+kubectl logs nginx-pod
+
+# Describe your pod
+
+kubectl describe  pod nginx-pod
+
+# Attach a bash terminal to your pod
+
+kubectl exec -it nginx-pod /bin/bash
+
+# Exit from pod terminal
+
+exit
+
+# Delete the pod
+
+kubectl delete pod nginx-pod
+
+# Create pod using yaml file
+
+kubectl create -f pod-defination.yaml
+
+# Check for pod again
+
+kubectl get pod 
+
+# Check more information about pod such as Ip Address of Pod, on which node it is running
+
+kubectl get pod -o wide
+
+# Delete your pod using yaml file
+
+kubectl delete -f pod-defination.yaml
+
+
+
+
+
+

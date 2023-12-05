@@ -1,0 +1,36 @@
+# Create docker container
+docker run httpd -name httpd-container -d –p 8089:80
+
+# Check for containers
+docker ps
+
+# Open the browser and check below URL
+localhost:8089
+
+# Stop the container
+docker stop <container_id>
+
+# Start the container
+docker start <container_id>
+
+# Attach a terminal to container
+docker exec –it <container_id> /bin/bash
+
+# Checks container logs
+docker logs <container-id>
+
+# Remove container forcefully
+docker rm –f <container_id>
+
+# Run multiple container using docker-compose file
+docker-compose up -d
+
+# Check running containers
+docker ps
+
+# Delete running containers using docker-compose
+docker-compose down
+
+
+
+

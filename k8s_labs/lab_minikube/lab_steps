@@ -1,0 +1,18 @@
+# Delete any existing minikube cluster
+
+minikube delete
+
+# Start 1 node minikube cluster with 4 cpus
+
+minikube start --cpus=4
+
+# Check whether node has started as minikube cluster
+
+kubectl get node
+
+
+
+
+
+
+
